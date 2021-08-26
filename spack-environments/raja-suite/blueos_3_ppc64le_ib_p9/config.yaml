@@ -1,0 +1,3 @@
+config:
+  build_jobs: 32
+  concretizer: clingo

@@ -1,0 +1,151 @@
+##############################################################################
+# Copyright (c) 2020-2021, Lawrence Livermore National Security, LLC and
+# RADIUSS Stack project contributors. See the LICENSE file for details.
+#
+# SPDX-License-Identifier: MIT
+##############################################################################
+
+#[config-override--]
+packages::
+#[--config-override]
+  all:
+    permissions:
+        read: world
+        write: group
+        group: radiuss
+    providers:
+      blas:
+      - netlib-lapack
+      lapack:
+      - netlib-lapack
+      mpi:
+      - mvapich2
+      - openmpi
+      unwind:
+      - libunwind
+
+  mpi:
+    buildable: false
+  mvapich2:
+    buildable: false
+    externals:
+    - spec: mvapich2@2.2%gcc@8.1.0 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/mvapich2/mvapich2-2.2-gcc-8.1.0
+    - spec: mvapich2@2.3%gcc@8.1.0 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/mvapich2/mvapich2-2.3-gcc-8.1.0
+    - spec: mvapich2@2.2%gcc@8.3.1 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/mvapich2/mvapich2-2.2-gcc-8.3.1
+    - spec: mvapich2@2.3%gcc@8.3.1 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/mvapich2/mvapich2-2.3-gcc-8.3.1
+    - spec: mvapich2@2.2%clang@10.0.0 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/mvapich2/mvapich2-2.2-clang-10.0.0
+    - spec: mvapich2@2.3%clang@10.0.0 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/mvapich2/mvapich2-2.3-clang-10.0.0
+  openmpi:
+    buildable: false
+    externals:
+    - spec: openmpi@2.0.0%gcc@8.1.0 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/openmpi/openmpi-2.0.0-gcc-8.1.0
+    - spec: openmpi@2.1.0%gcc@8.1.0 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/openmpi/openmpi-2.1.0-gcc-8.1.0
+    - spec: openmpi@3.0.1%gcc@8.1.0 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/openmpi/openmpi-3.0.1-gcc-8.1.0
+    - spec: openmpi@2.0.0%gcc@8.3.1 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/openmpi/openmpi-2.0.0-gcc-8.3.1
+    - spec: openmpi@2.1.0%gcc@8.3.1 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/openmpi/openmpi-2.1.0-gcc-8.3.1
+    - spec: openmpi@3.0.1%gcc@8.3.1 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/openmpi/openmpi-3.0.1-gcc-8.3.1
+    - spec: openmpi@2.0.0%clang@10.0.0 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/openmpi/openmpi-2.0.0-clang-10.0.0
+    - spec: openmpi@2.1.0%clang@10.0.0 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/openmpi/openmpi-2.1.0-clang-10.0.0
+    - spec: openmpi@3.0.1%clang@10.0.0 arch=linux-rhel7-broadwell
+      prefix: /usr/tce/packages/openmpi/openmpi-3.0.1-clang-10.0.0
+  cmake:
+    version:
+    - 3.18.0
+    buildable: false
+    externals:
+    - spec: cmake@3.18.0
+      prefix: /usr/tce/packages/cmake/cmake-3.18.0
+  python:
+    buildable: false
+    externals:
+    - spec: python@3.8.2
+      prefix: /usr/tce/packages/python/python-3.8.2
+  netlib-lapack:
+    buildable: false
+    externals:
+    - spec: netlib-lapack@3.6.1
+      prefix: /usr
+  autoconf:
+    buildable: false
+    externals:
+    - spec: autoconf@2.69
+      prefix: /usr
+  automake:
+    buildable: false
+    externals:
+    - spec: automake@1.13.4
+      prefix: /usr
+  bzip2:
+    buildable: false
+    externals:
+    - spec: bzip2@1.0.6
+      prefix: /usr
+  gettext:
+    buildable: false
+    externals:
+    - spec: gettext@0.19.8.1
+      prefix: /usr
+  graphviz:
+    buildable: false
+    externals:
+    - spec: graphviz@2.30.1
+      prefix: /usr
+  libtool:
+    buildable: false
+    externals:
+    - spec: libtool@2.4.2
+      prefix: /usr
+  libx11:
+    buildable: false
+    externals:
+    - spec: libx11@1.20.4
+      prefix: /usr
+  m4:
+    buildable: false
+    externals:
+    - spec: m4@1.4.16
+      prefix: /usr
+  perl:
+    buildable: false
+    externals:
+    - spec: perl@5.16.3
+      prefix: /usr
+  pkg-config:
+    buildable: false
+    externals:
+    - spec: pkg-config@0.27.1
+      prefix: /usr
+  tar:
+    buildable: false
+    externals:
+    - spec: tar@1.26
+      prefix: /usr
+  unzip:
+    buildable: false
+    externals:
+    - spec: readline@6.2
+      prefix: /usr
+  unzip:
+    buildable: false
+    externals:
+    - spec: unzip@6.0
+      prefix: /usr
+  zlib:
+    buildable: false
+    externals:
+    - spec: zlib@1.2.7
+      prefix: /usr

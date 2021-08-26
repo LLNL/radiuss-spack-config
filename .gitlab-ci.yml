@@ -10,10 +10,10 @@ variables:
   SPACK_PARENT_DIR: ${CI_BUILDS_DIR}/llnl-stack-${CI_COMMIT_SHORT_SHA}
   SPACK_PATH: ${CI_BUILDS_DIR}/llnl-stack-${CI_COMMIT_SHORT_SHA}/spack
   #[--create-unique-path]
-  SPACK_REPO: https://github.com/spack/spack.git
-  SPACK_REF: develop
+  SPACK_REPO: https://github.com/davidbeckingsale/spack.git
+  SPACK_REF: feature/new-raja-suite-versions
   SPACK_DEBUG: "-d"
-  ENV_NAME: "radiuss"
+  ENV_NAME: "raja-suite"
 
 # We only do one generation per stage because we found conflicts otherwise
 #[one-generate-per-stage--]
