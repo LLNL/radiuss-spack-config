@@ -48,7 +48,6 @@ build-on-lassen:
     include:
       - artifact: "jobs_scratch_dir/pipeline.yml"
         job: generate-on-lassen
-      - local: ".gitlab/lassen-shared-alloc.yml"
       - project: "lc-templates/id_tokens"
         file: "id_tokens.yml"
     strategy: depend

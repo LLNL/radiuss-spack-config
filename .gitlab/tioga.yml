@@ -77,7 +77,6 @@ build-on-tioga:
     include:
       - artifact: "jobs_scratch_dir/pipeline.yml"
         job: generate-on-tioga
-      - local: ".gitlab/tioga-shared-alloc.yml"
       - project: "lc-templates/id_tokens"
         file: "id_tokens.yml"
     strategy: depend

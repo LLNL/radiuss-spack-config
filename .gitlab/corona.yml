@@ -77,7 +77,6 @@ build-on-corona:
     include:
       - artifact: "jobs_scratch_dir/pipeline.yml"
         job: generate-on-corona
-      - local: ".gitlab/corona-shared-alloc.yml"
       - project: "lc-templates/id_tokens"
         file: "id_tokens.yml"
     strategy: depend
