@@ -39,6 +39,7 @@ release-ruby:
   stage: .post
   script:
     - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
+    - echo -e "[Information] Shared allocation ID = ${JOBID}"
     - ([[ -n "${JOBID}" ]] && scancel ${JOBID} || exit 0)
   needs: [rm-spack-ruby]
 
@@ -47,7 +48,8 @@ get-spack-ruby:
   extends: [.on-ruby, .ruby-variables]
   stage: setup
   script:
-    - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
+    - export ALLOC_ID=$(flux jobs --name="${RUBY_ALLOC_NAME}" -n -o "{id}")
+    - echo -e "[Information] Shared allocation ID = ${JOBID}"
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --reservation=ci --nodes=2 -n 2 scripts/get-spack
   needs: [allocate-ruby]
 #[--get-spack]
@@ -58,6 +60,7 @@ generate-on-ruby:
   script:
     - scripts/print-variables
     - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
+    - echo -e "[Information] Shared allocation ID = ${JOBID}"
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --reservation=ci --nodes=1 .gitlab/spack/generate-script.sh
   artifacts:
     paths:
@@ -86,7 +89,8 @@ rm-spack-ruby:
   extends: [.on-ruby, .ruby-variables]
   stage: clean
   script:
-    - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
+    - export ALLOC_ID=$(flux jobs --name="${RUBY_ALLOC_NAME}" -n -o "{id}")
+    - echo -e "[Information] Shared allocation ID = ${JOBID}"
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --reservation=ci --nodes=2 -n 2 scripts/remove-spack
   needs: [build-on-ruby]
 #[--rm-spack]

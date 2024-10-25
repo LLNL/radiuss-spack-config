@@ -39,6 +39,7 @@ release-poodle:
   stage: .post
   script:
     - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
+    - echo -e "[Information] Shared allocation ID = ${JOBID}"
     - ([[ -n "${JOBID}" ]] && scancel ${JOBID} || exit 0)
   needs: [rm-spack-poodle]
 
@@ -47,6 +48,7 @@ get-spack-poodle:
   stage: setup
   script:
     - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
+    - echo -e "[Information] Shared allocation ID = ${JOBID}"
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --nodes=1 scripts/get-spack
   needs: [allocate-poodle]
 
@@ -56,6 +58,7 @@ generate-on-poodle:
   script:
     - scripts/print-variables
     - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
+    - echo -e "[Information] Shared allocation ID = ${JOBID}"
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --nodes=1 .gitlab/spack/generate-script.sh
   artifacts:
     paths:
@@ -82,5 +85,6 @@ rm-spack-poodle:
   stage: clean
   script:
     - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
+    - echo -e "[Information] Shared allocation ID = ${JOBID}"
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --nodes=1 scripts/remove-spack
   needs: [build-on-poodle]

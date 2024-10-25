@@ -51,6 +51,8 @@ get-spack-tioga:
   stage: setup
   script:
     - export ALLOC_ID=$(flux jobs --name="${TIOGA_ALLOC_NAME}" -n -o "{id}")
+    - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
+    - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/get-spack)
   needs: [allocate-tioga]
 
@@ -60,6 +62,8 @@ generate-on-tioga:
   script:
     - scripts/print-variables
     - export ALLOC_ID=$(flux jobs --name="${TIOGA_ALLOC_NAME}" -n -o "{id}")
+    - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
+    - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s .gitlab/spack/generate-script.sh)
   artifacts:
     paths:
@@ -86,5 +90,7 @@ rm-spack-tioga:
   stage: clean
   script:
     - export ALLOC_ID=$(flux jobs --name="${TIOGA_ALLOC_NAME}" -n -o "{id}")
+    - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
+    - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/remove-spack)
   needs: [build-on-tioga]
