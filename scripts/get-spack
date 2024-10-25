@@ -10,6 +10,8 @@
 set -e
 set -x
 
+hostname
+
 #[get-spack--]
 if [[ ! -d ${MY_SPACK_PARENT_DIR}/spack ]]
 then

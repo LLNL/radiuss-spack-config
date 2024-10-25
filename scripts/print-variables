@@ -1,5 +1,7 @@
 #!/bin/bash
 
+hostname
+
 vars="MY_ENV_NAME MY_SPACK_COMMIT MY_SPACK_BRANCH MY_SPACK_REPO MY_SPACK_PARENT_DIR"
 
 echo "--------------------------------"
