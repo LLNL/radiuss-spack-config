@@ -19,12 +19,12 @@ variables:
     - if: '$ON_POODLE == "OFF"'
       when: never
     # We should always release resources allocated in the pipeline.
-    - if: '$CI_JOB_NAME =~ /release_resources/'
+    - if: '$CI_JOB_NAME =~ /release-poodle/'
       when: always
     # A true statement is expected to allow jobs to run. Here is the default.
     - when: on_success
 
-allocate_resources:
+allocate-poodle:
   variables:
     GIT_STRATEGY: none
   extends: [.on-poodle, .poodle-variables]
@@ -32,7 +32,7 @@ allocate_resources:
   script:
     - salloc ${POODLE_SHARED_ALLOC} --no-shell --job-name=${POODLE_ALLOC_NAME}
 
-release_resources:
+release-poodle:
   variables:
     GIT_STRATEGY: none
   extends: [.on-poodle, .poodle-variables]

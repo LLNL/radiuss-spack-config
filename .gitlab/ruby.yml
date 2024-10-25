@@ -19,12 +19,12 @@ variables:
     - if: '$ON_RUBY == "OFF"'
       when: never
     # We should always release resources allocated in the pipeline.
-    - if: '$CI_JOB_NAME =~ /release_resources/'
+    - if: '$CI_JOB_NAME =~ /release-ruby/'
       when: always
     # A true statement is expected to allow jobs to run. Here is the default.
     - when: on_success
 
-allocate_resources:
+allocate-ruby:
   variables:
     GIT_STRATEGY: none
   extends: [.on-ruby, .ruby-variables]
@@ -32,7 +32,7 @@ allocate_resources:
   script:
     - salloc ${RUBY_SHARED_ALLOC} --no-shell --job-name=${RUBY_ALLOC_NAME}
 
-release_resources:
+release-ruby:
   variables:
     GIT_STRATEGY: none
   extends: [.on-ruby, .ruby-variables]

@@ -19,12 +19,12 @@ variables:
     - if: '$ON_CORONA == "OFF"'
       when: never
     # We should always release resources allocated in the pipeline.
-    - if: '$CI_JOB_NAME =~ /release_resources/'
+    - if: '$CI_JOB_NAME =~ /release-corona/'
       when: always
     # A true statement is expected to allow jobs to run. Here is the default.
     - when: on_success
 
-allocate_resources:
+allocate-corona:
   variables:
     GIT_STRATEGY: none
   extends: [.on-corona, .corona-variables]
@@ -34,7 +34,7 @@ allocate_resources:
       set -x
       flux --parent alloc ${CORONA_SHARED_ALLOC} --job-name=${CORONA_ALLOC_NAME} --bg
 
-release_resources:
+release-corona:
   variables:
     GIT_STRATEGY: none
   extends: [.on-corona, .corona-variables]
