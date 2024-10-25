@@ -6,6 +6,8 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
+hostname
+
 . ${MY_SPACK_PARENT_DIR}/spack/share/spack/setup-env.sh
 spack ${MY_SPACK_DEBUG} env activate --without-view spack-environments/${MY_ENV_NAME}
 spack ${MY_SPACK_DEBUG} config blame mirrors

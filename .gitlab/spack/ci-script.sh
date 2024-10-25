@@ -6,6 +6,8 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
+hostname
+
 . ${MY_SPACK_PARENT_DIR}/spack/share/spack/setup-env.sh
 export SPACK_DISABLE_LOCAL_CONFIG=""
 export SPACK_USER_CACHE_PATH="${MY_SPACK_USER_CACHE}"

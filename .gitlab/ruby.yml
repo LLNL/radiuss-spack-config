@@ -48,7 +48,7 @@ get-spack-ruby:
   extends: [.on-ruby, .ruby-variables]
   stage: setup
   script:
-    - export ALLOC_ID=$(flux jobs --name="${RUBY_ALLOC_NAME}" -n -o "{id}")
+    - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
     - echo -e "[Information] Shared allocation ID = ${JOBID}"
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --reservation=ci --nodes=2 -n 2 scripts/get-spack
   needs: [allocate-ruby]
@@ -88,7 +88,7 @@ rm-spack-ruby:
   extends: [.on-ruby, .ruby-variables]
   stage: clean
   script:
-    - export ALLOC_ID=$(flux jobs --name="${RUBY_ALLOC_NAME}" -n -o "{id}")
+    - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
     - echo -e "[Information] Shared allocation ID = ${JOBID}"
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --reservation=ci --nodes=2 -n 2 scripts/remove-spack
   needs: [build-on-ruby]
