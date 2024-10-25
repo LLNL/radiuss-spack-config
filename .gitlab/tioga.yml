@@ -44,6 +44,7 @@ release-tioga:
       set -x
       export URI=$(flux jobs -o "{id} {name}" | grep ${TIOGA_ALLOC_NAME} | awk '{print $1}')
       ([[ -n "${URI}" ]] && flux job kill ${URI} || exit 0)
+  needs: [rm-spack-tioga]
 
 get-spack-tioga:
   extends: [.on-tioga, .tioga-variables]
@@ -51,6 +52,7 @@ get-spack-tioga:
   script:
     - export ALLOC_ID=$(flux jobs --name="${TIOGA_ALLOC_NAME}" -n -o "{id}")
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/get-spack)
+  needs: [allocate-tioga]
 
 generate-on-tioga:
   extends: [.on-tioga, .tioga-variables]
@@ -62,6 +64,7 @@ generate-on-tioga:
   artifacts:
     paths:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
+  needs: [get-spack-tioga]
 
 build-on-tioga:
   extends: [.tioga-variables]
@@ -84,3 +87,4 @@ rm-spack-tioga:
   script:
     - export ALLOC_ID=$(flux jobs --name="${TIOGA_ALLOC_NAME}" -n -o "{id}")
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/remove-spack)
+  needs: [build-on-tioga]

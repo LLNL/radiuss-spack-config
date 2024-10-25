@@ -44,6 +44,7 @@ release-corona:
       set -x
       export URI=$(flux jobs -o "{id} {name}" | grep ${CORONA_ALLOC_NAME} | awk '{print $1}')
       ([[ -n "${URI}" ]] && flux job kill ${URI} || exit 0)
+  needs: [rm-spack-corona]
 
 get-spack-corona:
   extends: [.on-corona, .corona-variables]
@@ -51,6 +52,7 @@ get-spack-corona:
   script:
     - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/get-spack)
+  needs: [allocate-corona]
 
 generate-on-corona:
   extends: [.on-corona, .corona-variables]
@@ -62,6 +64,7 @@ generate-on-corona:
   artifacts:
     paths:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
+  needs: [get-spack-corona]
 
 build-on-corona:
   extends: [.corona-variables]
@@ -84,3 +87,4 @@ rm-spack-corona:
   script:
     - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/remove-spack)
+  needs: [build-on-corona]

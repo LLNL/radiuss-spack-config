@@ -40,6 +40,7 @@ release-ruby:
   script:
     - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
     - ([[ -n "${JOBID}" ]] && scancel ${JOBID} || exit 0)
+  needs: [rm-spack-ruby]
 
 #[get-spack--]
 get-spack-ruby:
@@ -48,6 +49,7 @@ get-spack-ruby:
   script:
     - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --reservation=ci --nodes=2 -n 2 scripts/get-spack
+  needs: [allocate-ruby]
 #[--get-spack]
 
 generate-on-ruby:
@@ -60,6 +62,7 @@ generate-on-ruby:
   artifacts:
     paths:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
+  needs: [get-spack-ruby]
 
 #[send-variable-child--]
 build-on-ruby:
@@ -85,4 +88,5 @@ rm-spack-ruby:
   script:
     - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --reservation=ci --nodes=2 -n 2 scripts/remove-spack
+  needs: [build-on-ruby]
 #[--rm-spack]

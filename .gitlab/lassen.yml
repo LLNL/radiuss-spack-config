@@ -38,6 +38,7 @@ generate-on-lassen:
   artifacts:
     paths:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
+  needs: [get-spack-lassen]
 
 build-on-lassen:
   extends: [.lassen-variables]
@@ -59,3 +60,4 @@ rm-spack-lassen:
   stage: clean
   script:
     - scripts/remove-spack
+  needs: [build-on-lassen]

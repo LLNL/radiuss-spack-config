@@ -40,6 +40,7 @@ release-poodle:
   script:
     - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
     - ([[ -n "${JOBID}" ]] && scancel ${JOBID} || exit 0)
+  needs: [rm-spack-poodle]
 
 get-spack-poodle:
   extends: [.on-poodle, .poodle-variables]
@@ -47,6 +48,7 @@ get-spack-poodle:
   script:
     - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --nodes=1 scripts/get-spack
+  needs: [allocate-poodle]
 
 generate-on-poodle:
   extends: [.on-poodle, .poodle-variables]
@@ -58,6 +60,7 @@ generate-on-poodle:
   artifacts:
     paths:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
+  needs: [get-spack-poodle]
 
 build-on-poodle:
   extends: [.poodle-variables]
@@ -80,3 +83,4 @@ rm-spack-poodle:
   script:
     - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --nodes=1 scripts/remove-spack
+  needs: [build-on-poodle]
