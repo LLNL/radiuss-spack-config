@@ -32,6 +32,13 @@ ci:
         - export JOBID=$(squeue -h --name=${ALLOC_NAME} --format=%A)
         - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${RUBY_JOB_ALLOC} .gitlab/spack/ci-script.sh
     - match:
+      - 'target=sapphirerapids'
+      build-job:
+        tags: [poodle, shell]
+        script::
+        - export JOBID=$(squeue -h --name=${ALLOC_NAME} --format=%A)
+        - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${POODLE_JOB_ALLOC} .gitlab/spack/ci-script.sh
+    - match:
       - 'target=power9le'
       build-job:
         tags: [lassen, shell]

@@ -32,6 +32,17 @@
     MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
 #[--create-unique-path]
 
+.on-poodle:
+  tags: [shell, poodle]
+
+.poodle-variables:
+  variables:
+    SPACK_DISABLE_LOCAL_CONFIG: ""
+    MY_SPACK_DEBUG: ""
+    MY_SPACK_PARENT_DIR: ${CUSTOM_CI_BUILDS_DIR}/llnl-stack-${CI_PIPELINE_ID}-poodle
+    SPACK_USER_CACHE_PATH: ${CUSTOM_CI_BUILDS_DIR}/llnl-stack-${CI_PIPELINE_ID}-poodle/spack-user-cache
+    MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
+
 .on-lassen:
   tags: [shell, lassen]
 

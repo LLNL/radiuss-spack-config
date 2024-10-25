@@ -1,0 +1,39 @@
+##############################################################################
+# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+get-spack-poodle:
+  extends: [.on-poodle, .poodle-variables]
+  stage: setup
+  script:
+    - scripts/get-spack
+
+generate-on-poodle:
+  extends: [.on-poodle, .poodle-variables, .generate-pipeline]
+  stage: generate
+  before_script:
+    - scripts/print-variables
+
+build-on-poodle:
+  extends: [.poodle-variables]
+  stage: build
+  trigger:
+    include:
+      - artifact: "jobs_scratch_dir/pipeline.yml"
+        job: generate-on-poodle
+      - local: ".gitlab/poodle-shared-alloc.yml"
+      - project: "lc-templates/id_tokens"
+        file: "id_tokens.yml"
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  needs: [generate-on-poodle]
+
+rm-spack-poodle:
+  extends: [.on-poodle, .poodle-variables]
+  stage: clean
+  script:
+    - scripts/remove-spack

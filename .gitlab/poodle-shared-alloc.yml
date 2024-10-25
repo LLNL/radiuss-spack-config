@@ -1,0 +1,35 @@
+variables:
+  ALLOC_NAME: ${CI_PROJECT_NAME}_ci_${CI_PIPELINE_ID}
+  POODLE_SHARED_ALLOC: "--exclusive --reservation=ci --time=30 --nodes=2"
+  POODLE_JOB_ALLOC: "--reservation=ci --overlap --nodes=1"
+
+.on_poodle:
+  tags:
+    - shell
+    - poodle
+  rules:
+    # Runs except if we explicitly deactivate poodle by variable.
+    - if: '$ON_POODLE == "OFF"'
+      when: never
+    # We should always release resources allocated in the pipeline.
+    - if: '$CI_JOB_NAME =~ /release_resources/'
+      when: always
+    # A true statement is expected to allow jobs to run. Here is the default.
+    - when: on_success
+
+allocate_resources:
+  variables:
+    GIT_STRATEGY: none
+  extends: .on_poodle
+  stage: .pre
+  script:
+    - salloc ${POODLE_SHARED_ALLOC} --no-shell --job-name=${ALLOC_NAME}
+
+release_resources:
+  variables:
+    GIT_STRATEGY: none
+  extends: .on_poodle
+  stage: .post
+  script:
+    - export JOBID=$(squeue -h --name=${ALLOC_NAME} --format=%A)
+    - ([[ -n "${JOBID}" ]] && scancel ${JOBID} || exit 0)
