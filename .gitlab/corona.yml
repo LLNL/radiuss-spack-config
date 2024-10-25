@@ -5,17 +5,63 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
+variables:
+  CORONA_ALLOC_NAME: ${CI_PROJECT_NAME}_ci_${CI_PIPELINE_ID}
+  CORONA_SHARED_ALLOC: "--exclusive --time-limit=60m --nodes=1"
+  CORONA_JOB_ALLOC: "--nodes=1 --begin-time=+2s"
+
+.on-corona:
+  tags:
+    - shell
+    - corona
+  rules:
+    # Runs except if we explicitly deactivate corona by variable.
+    - if: '$ON_CORONA == "OFF"'
+      when: never
+    # We should always release resources allocated in the pipeline.
+    - if: '$CI_JOB_NAME =~ /release_resources/'
+      when: always
+    # A true statement is expected to allow jobs to run. Here is the default.
+    - when: on_success
+
+allocate_resources:
+  variables:
+    GIT_STRATEGY: none
+  extends: [.on-corona, .corona-variables]
+  stage: .pre
+  script:
+    - |
+      set -x
+      flux --parent alloc ${CORONA_SHARED_ALLOC} --job-name=${CORONA_ALLOC_NAME} --bg
+
+release_resources:
+  variables:
+    GIT_STRATEGY: none
+  extends: [.on-corona, .corona-variables]
+  stage: .post
+  script:
+    - |
+      set -x
+      export URI=$(flux jobs -o "{id} {name}" | grep ${CORONA_ALLOC_NAME} | awk '{print $1}')
+      ([[ -n "${URI}" ]] && flux job kill ${URI} || exit 0)
+
 get-spack-corona:
   extends: [.on-corona, .corona-variables]
   stage: setup
   script:
-    - scripts/get-spack
+    - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
+    - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/get-spack)
 
 generate-on-corona:
-  extends: [.on-corona, .corona-variables, .generate-pipeline]
+  extends: [.on-corona, .corona-variables]
   stage: generate
-  before_script:
+  script:
     - scripts/print-variables
+    - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
+    - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s .gitlab/spack/generate-script.sh)
+  artifacts:
+    paths:
+      - "${CI_PROJECT_DIR}/jobs_scratch_dir"
 
 build-on-corona:
   extends: [.corona-variables]
@@ -36,4 +82,5 @@ rm-spack-corona:
   extends: [.on-corona, .corona-variables]
   stage: clean
   script:
-    - scripts/remove-spack
+    - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
+    - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/remove-spack)
