@@ -11,10 +11,7 @@ variables:
   LLNL_SERVICE_USER: bradiuss
 # Use the service user workspace. Solves permission issues, stores everything
 # at the same location whoever triggers a pipeline.
-#  CUSTOM_CI_BUILDS_DIR: /usr/workspace/bradiuss/gitlab-runner
-# Use shared memory to speed up builds.
-# Warning! assumes that we initialize the directory structure on each node.
-  CUSTOM_CI_BUILDS_DIR: /dev/shm
+  CUSTOM_CI_BUILDS_DIR: /usr/workspace/bradiuss/gitlab-runner
 
 stages:
   - setup
