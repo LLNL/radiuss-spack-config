@@ -28,6 +28,7 @@ get-spack-lassen:
   stage: setup
   script:
     - scripts/get-spack
+  needs: []
 
 generate-on-lassen:
   extends: [.on-lassen, .lassen-variables]
