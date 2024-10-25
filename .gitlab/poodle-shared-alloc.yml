@@ -1,6 +1,6 @@
 variables:
   ALLOC_NAME: ${CI_PROJECT_NAME}_ci_${CI_PIPELINE_ID}
-  POODLE_SHARED_ALLOC: "--exclusive --time=30 --nodes=2"
+  POODLE_SHARED_ALLOC: "--exclusive --time=60 --nodes=1"
   POODLE_JOB_ALLOC: "--overlap --nodes=1"
 
 .on_poodle:
