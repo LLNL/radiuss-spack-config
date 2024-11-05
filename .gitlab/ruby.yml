@@ -32,25 +32,20 @@ allocate-ruby:
   script:
     - salloc ${RUBY_SHARED_ALLOC} --no-shell --job-name=${RUBY_ALLOC_NAME}
 
-release-ruby:
-  variables:
-    GIT_STRATEGY: none
-  extends: [.on-ruby, .ruby-variables]
-  stage: .post
+.prepare_ruby_jobid:
   script:
-    - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
-    - echo -e "[Information] Shared allocation ID = ${JOBID}"
-    - ([[ -n "${JOBID}" ]] && scancel ${JOBID} || exit 0)
-  needs: [rm-spack-ruby]
+    - |
+      export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
+      echo -e "[Information] Shared allocation ID = ${JOBID}"
+      export JOBID_OPT=$([[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}")
 
 #[get-spack--]
 get-spack-ruby:
   extends: [.on-ruby, .ruby-variables]
   stage: setup
   script:
-    - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
-    - echo -e "[Information] Shared allocation ID = ${JOBID}"
-    - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --reservation=ci --nodes=2 -n 2 scripts/get-spack
+    - !reference [.prepare_ruby_jobid, script]
+    - srun ${JOBID_OPT} --reservation=ci --nodes=2 -n 2 scripts/get-spack
   needs: [allocate-ruby]
 #[--get-spack]
 
@@ -59,9 +54,8 @@ generate-on-ruby:
   stage: generate
   script:
     - scripts/print-variables
-    - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
-    - echo -e "[Information] Shared allocation ID = ${JOBID}"
-    - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --reservation=ci --nodes=1 .gitlab/spack/generate-script.sh
+    - !reference [.prepare_ruby_jobid, script]
+    - srun ${JOBID_OPT} --reservation=ci --nodes=1 .gitlab/spack/generate-script.sh
   artifacts:
     paths:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
@@ -88,8 +82,17 @@ rm-spack-ruby:
   extends: [.on-ruby, .ruby-variables]
   stage: clean
   script:
-    - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
-    - echo -e "[Information] Shared allocation ID = ${JOBID}"
-    - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --reservation=ci --nodes=2 -n 2 scripts/remove-spack
+    - !reference [.prepare_ruby_jobid, script]
+    - srun ${JOBID_OPT} --reservation=ci --nodes=2 -n 2 scripts/remove-spack
   needs: [build-on-ruby]
 #[--rm-spack]
+
+release-ruby:
+  variables:
+    GIT_STRATEGY: none
+  extends: [.on-ruby, .ruby-variables]
+  stage: .post
+  script:
+    - !reference [.prepare_ruby_jobid, script]
+    - ([[ -n "${JOBID}" ]] && scancel ${JOBID} || exit 0)
+  needs: [rm-spack-ruby]

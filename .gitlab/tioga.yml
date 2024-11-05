@@ -34,25 +34,18 @@ allocate-tioga:
       set -x
       flux --parent alloc ${TIOGA_SHARED_ALLOC} --job-name=${TIOGA_ALLOC_NAME} --bg
 
-release-tioga:
-  variables:
-    GIT_STRATEGY: none
-  extends: [.on-tioga, .tioga-variables]
-  stage: .post
+.prepare_tioga_proxy:
   script:
     - |
-      set -x
-      export URI=$(flux jobs -o "{id} {name}" | grep ${TIOGA_ALLOC_NAME} | awk '{print $1}')
-      ([[ -n "${URI}" ]] && flux job kill ${URI} || exit 0)
-  needs: [rm-spack-tioga]
+      export ALLOC_ID=$(flux jobs --name="${TIOGA_ALLOC_NAME}" -n -o "{id}")
+      echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
+      export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
 
 get-spack-tioga:
   extends: [.on-tioga, .tioga-variables]
   stage: setup
   script:
-    - export ALLOC_ID=$(flux jobs --name="${TIOGA_ALLOC_NAME}" -n -o "{id}")
-    - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
-    - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
+    - !reference [.prepare_tioga_proxy, script]
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/get-spack)
   needs: [allocate-tioga]
 
@@ -61,9 +54,7 @@ generate-on-tioga:
   stage: generate
   script:
     - scripts/print-variables
-    - export ALLOC_ID=$(flux jobs --name="${TIOGA_ALLOC_NAME}" -n -o "{id}")
-    - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
-    - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
+    - !reference [.prepare_tioga_proxy, script]
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s .gitlab/spack/generate-script.sh)
   artifacts:
     paths:
@@ -88,8 +79,18 @@ rm-spack-tioga:
   extends: [.on-tioga, .tioga-variables]
   stage: clean
   script:
-    - export ALLOC_ID=$(flux jobs --name="${TIOGA_ALLOC_NAME}" -n -o "{id}")
-    - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
-    - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
+    - !reference [.prepare_tioga_proxy, script]
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/remove-spack)
   needs: [build-on-tioga]
+
+release-tioga:
+  variables:
+    GIT_STRATEGY: none
+  extends: [.on-tioga, .tioga-variables]
+  stage: .post
+  script:
+    - |
+      set -x
+      export URI=$(flux jobs -o "{id} {name}" | grep ${TIOGA_ALLOC_NAME} | awk '{print $1}')
+      ([[ -n "${URI}" ]] && flux job kill ${URI} || exit 0)
+  needs: [rm-spack-tioga]

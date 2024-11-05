@@ -34,25 +34,18 @@ allocate-corona:
       set -x
       flux --parent alloc ${CORONA_SHARED_ALLOC} --job-name=${CORONA_ALLOC_NAME} --bg
 
-release-corona:
-  variables:
-    GIT_STRATEGY: none
-  extends: [.on-corona, .corona-variables]
-  stage: .post
+.prepare_corona_proxy:
   script:
     - |
-      set -x
-      export URI=$(flux jobs -o "{id} {name}" | grep ${CORONA_ALLOC_NAME} | awk '{print $1}')
-      ([[ -n "${URI}" ]] && flux job kill ${URI} || exit 0)
-  needs: [rm-spack-corona]
+      export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
+      echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
+      export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
 
 get-spack-corona:
   extends: [.on-corona, .corona-variables]
   stage: setup
   script:
-    - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
-    - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
-    - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
+    - !reference [.prepare_corona_proxy, script]
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/get-spack)
   needs: [allocate-corona]
 
@@ -61,9 +54,7 @@ generate-on-corona:
   stage: generate
   script:
     - scripts/print-variables
-    - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
-    - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
-    - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
+    - !reference [.prepare_corona_proxy, script]
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s .gitlab/spack/generate-script.sh)
   artifacts:
     paths:
@@ -88,8 +79,18 @@ rm-spack-corona:
   extends: [.on-corona, .corona-variables]
   stage: clean
   script:
-    - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
-    - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
-    - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
+    - !reference [.prepare_corona_proxy, script]
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs --nodes=1 --begin-time=+2s scripts/remove-spack)
   needs: [build-on-corona]
+
+release-corona:
+  variables:
+    GIT_STRATEGY: none
+  extends: [.on-corona, .corona-variables]
+  stage: .post
+  script:
+    - |
+      set -x
+      export URI=$(flux jobs -o "{id} {name}" | grep ${CORONA_ALLOC_NAME} | awk '{print $1}')
+      ([[ -n "${URI}" ]] && flux job kill ${URI} || exit 0)
+  needs: [rm-spack-corona]
