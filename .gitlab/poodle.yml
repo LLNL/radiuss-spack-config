@@ -32,24 +32,19 @@ allocate-poodle:
   script:
     - salloc ${POODLE_SHARED_ALLOC} --no-shell --job-name=${POODLE_ALLOC_NAME}
 
-release-poodle:
-  variables:
-    GIT_STRATEGY: none
-  extends: [.on-poodle, .poodle-variables]
-  stage: .post
+.prepare_poodle_jobid:
   script:
-    - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
-    - echo -e "[Information] Shared allocation ID = ${JOBID}"
-    - ([[ -n "${JOBID}" ]] && scancel ${JOBID} || exit 0)
-  needs: [rm-spack-poodle]
+    - |
+      export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
+      echo -e "[Information] Shared allocation ID = ${JOBID}"
+      export JOBID_OPT=$([[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}")
 
 get-spack-poodle:
   extends: [.on-poodle, .poodle-variables]
   stage: setup
   script:
-    - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
-    - echo -e "[Information] Shared allocation ID = ${JOBID}"
-    - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --nodes=1 scripts/get-spack
+    - !reference [.prepare_poodle_jobid]
+    - srun ${JOBID_OPT} --nodes=1 scripts/get-spack
   needs: [allocate-poodle]
 
 generate-on-poodle:
@@ -57,9 +52,8 @@ generate-on-poodle:
   stage: generate
   script:
     - scripts/print-variables
-    - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
-    - echo -e "[Information] Shared allocation ID = ${JOBID}"
-    - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --nodes=1 .gitlab/spack/generate-script.sh
+    - !reference [.prepare_poodle_jobid]
+    - srun ${JOBID_OPT} --nodes=1 .gitlab/spack/generate-script.sh
   artifacts:
     paths:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
@@ -83,7 +77,16 @@ rm-spack-poodle:
   extends: [.on-poodle, .poodle-variables]
   stage: clean
   script:
-    - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
-    - echo -e "[Information] Shared allocation ID = ${JOBID}"
-    - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) --nodes=1 scripts/remove-spack
+    - !reference [.prepare_poodle_jobid]
+    - srun ${JOBID_OPT} --nodes=1 scripts/remove-spack
   needs: [build-on-poodle]
+
+release-poodle:
+  variables:
+    GIT_STRATEGY: none
+  extends: [.on-poodle, .poodle-variables]
+  stage: .post
+  script:
+    - !reference [.prepare_poodle_jobid]
+    - ([[ -n "${JOBID}" ]] && scancel ${JOBID} || exit 0)
+  needs: [rm-spack-poodle]
