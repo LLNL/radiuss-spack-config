@@ -8,7 +8,7 @@ compilers::
       fc: /usr/tce/packages/cce-tce/cce-12.0.3/bin/crayftn
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -21,7 +21,7 @@ compilers::
       fc: /usr/tce/packages/cce-tce/cce-13.0.2/bin/crayftn
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -34,7 +34,7 @@ compilers::
       fc: /usr/tce/packages/cce-tce/cce-14.0.3/bin/crayftn
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -47,7 +47,7 @@ compilers::
       fc: /usr/tce/packages/cce-tce/cce-15.0.1/bin/crayftn
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -60,7 +60,7 @@ compilers::
       fc: /usr/tce/packages/cce-tce/cce-16.0.1/bin/crayftn
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -73,7 +73,7 @@ compilers::
       fc: /usr/tce/packages/cce-tce/cce-17.0.1/bin/crayftn
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -86,7 +86,7 @@ compilers::
       fc: /usr/tce/packages/cce-tce/cce-18.0.0/bin/crayftn
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -99,7 +99,7 @@ compilers::
       fc: /usr/bin/gfortran
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -112,7 +112,7 @@ compilers::
       fc: /usr/bin/gfortran
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -125,7 +125,7 @@ compilers::
       fc: /usr/tce/packages/gcc-tce/gcc-10.3.1/bin/gfortran
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -138,7 +138,7 @@ compilers::
       fc: /opt/cray/pe/gcc/11.2.0/bin/gfortran
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -151,7 +151,7 @@ compilers::
       fc: /opt/cray/pe/gcc/12.1.1/bin/gfortran
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -164,7 +164,7 @@ compilers::
       fc: /opt/rocm-5.2.3/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -177,7 +177,7 @@ compilers::
       fc: /opt/rocm-5.3.0/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -190,7 +190,7 @@ compilers::
       fc: /opt/rocm-5.4.1/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -203,7 +203,7 @@ compilers::
       fc: /opt/rocm-5.4.3/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -216,7 +216,7 @@ compilers::
       fc: /opt/rocm-5.5.1/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -229,7 +229,7 @@ compilers::
       fc: /opt/rocm-5.6.1/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -242,7 +242,7 @@ compilers::
       fc: /opt/rocm-5.7.0/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -255,7 +255,7 @@ compilers::
       fc: /opt/rocm-5.7.1/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -268,7 +268,7 @@ compilers::
       fc: /opt/rocm-6.1.1/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -281,7 +281,7 @@ compilers::
       fc: /opt/rocm-6.1.2/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []
@@ -294,7 +294,7 @@ compilers::
       fc: /opt/rocm-6.2.0/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen3
     modules: []
     environment: {}
     extra_rpaths: []

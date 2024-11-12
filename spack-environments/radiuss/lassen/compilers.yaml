@@ -8,7 +8,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2020.03.18/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -21,7 +21,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2020.09.17/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -34,7 +34,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2020.11.12/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -47,7 +47,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2021.09.22/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -60,7 +60,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2021.09.22-gcc-8.3.1/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -73,7 +73,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2021.09.22/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -86,7 +86,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2022.08.19/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -99,7 +99,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2022.08.19-gcc-8.3.1/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -112,7 +112,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2021.09.22/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -125,7 +125,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2023.06.28/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -138,7 +138,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2023.06.28-gcc-8.3.1/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -151,7 +151,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2023.06.28-cuda-11.8.0-gcc-11.2.1/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -164,7 +164,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2020.03.18/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -177,7 +177,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2020.09.17/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -190,7 +190,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2020.11.12/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -203,7 +203,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2021.09.22/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -216,7 +216,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2021.09.22-gcc-8.3.1/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -229,7 +229,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2021.09.22/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -242,7 +242,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2022.08.19/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -255,7 +255,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2022.08.19-gcc-8.3.1/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -268,7 +268,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2021.09.22/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -281,7 +281,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2023.06.28/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -294,7 +294,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2023.06.28-gcc-8.3.1/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -307,7 +307,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2023.06.28-cuda-11.8.0-gcc-11.2.1//bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -320,7 +320,7 @@ compilers::
       fc: /usr/tce/packages/xl/xl-beta-2019.06.20/bin/xlf2003_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -333,7 +333,7 @@ compilers::
       fc: /usr/tce/packages/xl/xl-beta-2019.06.20/bin/xlf2003_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -346,7 +346,7 @@ compilers::
       fc: gfortran
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -359,7 +359,7 @@ compilers::
       fc: /usr/tce/packages/gcc/gcc-4.9.3/bin/gfortran
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -372,7 +372,7 @@ compilers::
       fc: /usr/tce/packages/gcc/gcc-8.3.1/bin/gfortran
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -385,7 +385,7 @@ compilers::
       fc: /usr/tce/packages/gcc/gcc-11.2.1/bin/gfortran
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -398,7 +398,7 @@ compilers::
       fc: xlf2003
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -411,7 +411,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2021.09.22/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -424,7 +424,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2021.09.22-gcc-8.3.1/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -437,7 +437,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2021.12.22/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -450,7 +450,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2022.08.19/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -463,7 +463,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2022.08.19-gcc-8.3.1/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -476,7 +476,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2023.06.28/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -489,7 +489,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2023.06.28-gcc-8.3.1/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -502,7 +502,7 @@ compilers::
       f77: /usr/tce/packages/xl/xl-2023.06.28-cuda-11.8.0-gcc-11.2.1/bin/xlf_r
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -515,7 +515,7 @@ compilers::
       fc: pgfortran
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -528,7 +528,7 @@ compilers::
       fc: /usr/tce/packages/pgi/pgi-19.10/bin/pgfortran
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -541,7 +541,7 @@ compilers::
       fc: /usr/tce/packages/pgi/pgi-20.4/bin/pgf90
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -554,7 +554,7 @@ compilers::
       fc: /usr/tce/packages/pgi/pgi-21.11/bin/pgf90
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -567,7 +567,7 @@ compilers::
       fc: /usr/tce/packages/pgi/pgi-22.7/bin/pgf90
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -580,7 +580,7 @@ compilers::
       fc: /usr/tce/packages/pgi/pgi-22.11/bin/pgf90
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []
@@ -593,7 +593,7 @@ compilers::
       fc: /usr/tce/packages/pgi/pgi-23.1/bin/pgf90
     flags: {}
     operating_system: rhel7
-    target: ppc64le
+    target: power9le
     modules: []
     environment: {}
     extra_rpaths: []

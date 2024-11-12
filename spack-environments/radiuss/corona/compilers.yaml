@@ -8,7 +8,7 @@ compilers::
       fc: /opt/rocm-5.0.2/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -21,7 +21,7 @@ compilers::
       fc: /opt/rocm-5.1.1/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -34,7 +34,7 @@ compilers::
       fc: /opt/rocm-5.2.3/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -47,7 +47,7 @@ compilers::
       fc: /opt/rocm-5.4.3/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -60,7 +60,7 @@ compilers::
       fc: /opt/rocm-5.5.0/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -73,7 +73,7 @@ compilers::
       fc: /opt/rocm-5.5.1/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -86,7 +86,7 @@ compilers::
       fc: /opt/rocm-5.6.1/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -99,7 +99,7 @@ compilers::
       fc: /opt/rocm-5.7.1/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -112,7 +112,7 @@ compilers::
       fc: /opt/rocm-6.0.2/llvm/bin/amdflang
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -125,7 +125,7 @@ compilers::
       fc: /opt/toss/pgi/20.4/linux86-64-llvm/20.4/bin/pgfortran
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -138,7 +138,7 @@ compilers::
       fc: /usr/tce/packages/intel-classic/intel-classic-2021.6.0/bin/ifort
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -154,7 +154,7 @@ compilers::
       cxxflags: -gxx-name=/usr/tce/packages/gcc/gcc-10.3.1/bin/g++
       fflags: -gcc-name=/usr/tce/packages/gcc/gcc-10.3.1/bin/gcc
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -167,7 +167,7 @@ compilers::
       fc: /usr/tce/packages/intel/intel-2022.1.0/compiler/2022.1.0/linux/bin/ifx
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -183,7 +183,7 @@ compilers::
       cxxflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-10.3.1
       fflags: -gcc-name=/usr/tce/packages/gcc/gcc-10.3.1/bin/gcc
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -196,7 +196,7 @@ compilers::
       fc: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/ifx
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -212,7 +212,7 @@ compilers::
       cxxflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-10.3.1
       fflags: -gcc-name=/usr/tce/packages/gcc/gcc-10.3.1/bin/gcc
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -225,7 +225,7 @@ compilers::
       fc: /usr/tce/packages/gcc/gcc-10.3.1/bin/gfortran
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -240,7 +240,7 @@ compilers::
       cflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-10.3.1
       cxxflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-10.3.1
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -253,7 +253,7 @@ compilers::
       fc: /usr/tce/packages/gcc/gcc-10.3.1/bin/gfortran
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: [/usr/workspace/raja-dev/clang_sycl_2f03ef85fee5_hip_gcc10.3.1_rocm5.7.1/lib, /usr/workspace/raja-dev/clang_sycl_2f03ef85fee5_hip_gcc10.3.1_rocm5.7.1/lib64]
@@ -266,7 +266,7 @@ compilers::
       fc: /usr/tce/packages/gcc/gcc-10.3.1/bin/gfortran
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -279,7 +279,7 @@ compilers::
       fc: /usr/tce/packages/gcc/gcc-11.2.1/bin/gfortran
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
@@ -292,7 +292,7 @@ compilers::
       fc: /usr/tce/packages/gcc/gcc-12.1.1/bin/gfortran
     flags: {}
     operating_system: rhel8
-    target: x86_64
+    target: zen
     modules: []
     environment: {}
     extra_rpaths: []
