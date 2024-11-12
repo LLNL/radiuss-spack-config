@@ -12,6 +12,7 @@
     MY_SPACK_PARENT_DIR: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-corona
     SPACK_USER_CACHE_PATH: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-corona/spack-user-cache
     MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
+    SPACK_TARGET: zen
 
 .ruby-variables:
   variables:
@@ -25,6 +26,7 @@
     # Spack cache for each CI job in the generated pipeline (avoids collision)
     MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
 #[--create-unique-path]
+    SPACK_TARGET: cascadelake
 
 .poodle-variables:
   variables:
@@ -33,6 +35,7 @@
     MY_SPACK_PARENT_DIR: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-poodle
     SPACK_USER_CACHE_PATH: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-poodle/spack-user-cache
     MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
+    SPACK_TARGET: sapphirerapids
 
 .lassen-variables:
   variables:
@@ -41,6 +44,7 @@
     MY_SPACK_PARENT_DIR: ${CUSTOM_CI_BUILDS_DIR}/llnl-stack-${CI_PIPELINE_ID}-lassen
     SPACK_USER_CACHE_PATH: ${CUSTOM_CI_BUILDS_DIR}/llnl-stack-${CI_PIPELINE_ID}-lassen/spack-user-cache
     MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
+    SPACK_TARGET: powel9le
 
 .tioga-variables:
   variables:
@@ -49,3 +53,4 @@
     MY_SPACK_PARENT_DIR: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-tioga
     SPACK_USER_CACHE_PATH: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-tioga/spack-user-cache
     MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
+    SPACK_TARGET: zen3
