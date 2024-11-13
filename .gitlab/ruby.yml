@@ -71,6 +71,7 @@ build-on-ruby:
         job: generate-on-ruby
       - project: "lc-templates/id_tokens"
         file: "id_tokens.yml"
+      - local: ".gitlab/spack/reindex-override.yml"
     strategy: depend
     forward:
       pipeline_variables: true

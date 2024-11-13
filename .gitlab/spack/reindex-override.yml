@@ -1,0 +1,59 @@
+
+reindex-job:
+  tags: [oslic, shell]
+  when: never
+  script:
+    - echo "Override the job set by Spack"
+
+reindex-job-ruby:
+  tags: [ruby, shell]
+  rules:
+    - if: '$SPACK_TARGET == "cascadelake"'
+      when: always
+    - when: never
+  script:
+    - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
+    - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${RUBY_JOB_ALLOC} .gitlab/spack/reindex-script.sh
+
+reindex-job-poodle:
+  tags: [poodle, shell]
+  rules:
+    - if: '$SPACK_TARGET == "sapphirerapids"'
+      when: always
+    - when: never
+  script:
+    - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
+    - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${POODLE_JOB_ALLOC} .gitlab/spack/reindex-script.sh
+
+reindex-job-lassen:
+  tags: [lassen, shell]
+  rules:
+    - if: '$SPACK_TARGET == "power9le"'
+      when: always
+    - when: never
+  script:
+    - lalloc ${LASSEN_JOB_ALLOC} .gitlab/spack/reindex-script.sh
+
+reindex-job-corona:
+  tags: [corona, shell]
+  rules:
+    - if: '$SPACK_TARGET == "zen"'
+      when: always
+    - when: never
+  script:
+    - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
+    - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
+    - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
+    - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs ${CORONA_JOB_ALLOC} .gitlab/spack/reindex-script.sh)
+
+reindex-job-tioga:
+  tags: [tioga, shell]
+  rules:
+    - if: '$SPACK_TARGET == "zen3"'
+      when: always
+    - when: never
+  script:
+    - export ALLOC_ID=$(flux jobs --name="${TIOGA_ALLOC_NAME}" -n -o "{id}")
+    - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
+    - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
+    - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs ${TIOGA_JOB_ALLOC} .gitlab/spack/reindex-script.sh)

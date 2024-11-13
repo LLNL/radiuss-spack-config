@@ -68,6 +68,7 @@ build-on-poodle:
         job: generate-on-poodle
       - project: "lc-templates/id_tokens"
         file: "id_tokens.yml"
+      - local: ".gitlab/spack/reindex-override.yml"
     strategy: depend
     forward:
       pipeline_variables: true
