@@ -1,7 +1,8 @@
 
 reindex-job:
   tags: [oslic, shell]
-  when: never
+  rules:
+    - when: never
   script:
     - echo "Override the job set by Spack"
 
