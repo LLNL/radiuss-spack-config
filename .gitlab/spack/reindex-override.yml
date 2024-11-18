@@ -1,5 +1,6 @@
 
 reindex-job:
+  stage: stage-rebuild-index
   tags: [oslic, shell]
   rules:
     - when: never
@@ -7,6 +8,7 @@ reindex-job:
     - echo "Override the job set by Spack"
 
 reindex-job-ruby:
+  stage: stage-rebuild-index
   tags: [ruby, shell]
   rules:
     - if: '$SPACK_TARGET == "cascadelake"'
@@ -17,6 +19,7 @@ reindex-job-ruby:
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${RUBY_JOB_ALLOC} .gitlab/spack/reindex-script.sh
 
 reindex-job-poodle:
+  stage: stage-rebuild-index
   tags: [poodle, shell]
   rules:
     - if: '$SPACK_TARGET == "sapphirerapids"'
@@ -27,6 +30,7 @@ reindex-job-poodle:
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${POODLE_JOB_ALLOC} .gitlab/spack/reindex-script.sh
 
 reindex-job-lassen:
+  stage: stage-rebuild-index
   tags: [lassen, shell]
   rules:
     - if: '$SPACK_TARGET == "power9le"'
@@ -36,6 +40,7 @@ reindex-job-lassen:
     - lalloc ${LASSEN_JOB_ALLOC} .gitlab/spack/reindex-script.sh
 
 reindex-job-corona:
+  stage: stage-rebuild-index
   tags: [corona, shell]
   rules:
     - if: '$SPACK_TARGET == "zen"'
@@ -48,6 +53,7 @@ reindex-job-corona:
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs ${CORONA_JOB_ALLOC} .gitlab/spack/reindex-script.sh)
 
 reindex-job-tioga:
+  stage: stage-rebuild-index
   tags: [tioga, shell]
   rules:
     - if: '$SPACK_TARGET == "zen3"'
