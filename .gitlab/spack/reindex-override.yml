@@ -1,5 +1,5 @@
 
-reindex-job:
+rebuild-index:
   stage: stage-rebuild-index
   tags: [oslic, shell]
   rules:
