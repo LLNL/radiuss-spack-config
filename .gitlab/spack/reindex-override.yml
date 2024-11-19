@@ -17,6 +17,7 @@ rebuild-index-ruby:
   script:
     - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${RUBY_JOB_ALLOC} .gitlab/spack/reindex-script.sh
+  dependencies: []
 
 rebuild-index-poodle:
   stage: stage-rebuild-index
@@ -28,6 +29,7 @@ rebuild-index-poodle:
   script:
     - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${POODLE_JOB_ALLOC} .gitlab/spack/reindex-script.sh
+  dependencies: []
 
 rebuild-index-lassen:
   stage: stage-rebuild-index
@@ -38,6 +40,7 @@ rebuild-index-lassen:
     - when: never
   script:
     - lalloc ${LASSEN_JOB_ALLOC} .gitlab/spack/reindex-script.sh
+  dependencies: []
 
 rebuild-index-corona:
   stage: stage-rebuild-index
@@ -51,6 +54,7 @@ rebuild-index-corona:
     - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
     - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs ${CORONA_JOB_ALLOC} .gitlab/spack/reindex-script.sh)
+  dependencies: []
 
 rebuild-index-tioga:
   stage: stage-rebuild-index
@@ -64,3 +68,4 @@ rebuild-index-tioga:
     - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
     - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs ${TIOGA_JOB_ALLOC} .gitlab/spack/reindex-script.sh)
+  dependencies: []
