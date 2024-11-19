@@ -12,11 +12,11 @@ spack:
   concretizer:
     reuse: false
     unify: false
-  view: false
   #[--general]
 
   #[config-override--]
   config:
+    view: false
     install_tree:
       root: /usr/workspace/radiuss/install/bradiuss
       padded_length: 128
