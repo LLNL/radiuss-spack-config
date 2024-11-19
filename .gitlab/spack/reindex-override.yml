@@ -7,7 +7,7 @@ rebuild-index:
   script:
     - echo "Override the job set by Spack"
 
-reindex-job-ruby:
+rebuild-index-ruby:
   stage: stage-rebuild-index
   tags: [ruby, shell]
   rules:
@@ -18,7 +18,7 @@ reindex-job-ruby:
     - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${RUBY_JOB_ALLOC} .gitlab/spack/reindex-script.sh
 
-reindex-job-poodle:
+rebuild-index-poodle:
   stage: stage-rebuild-index
   tags: [poodle, shell]
   rules:
@@ -29,7 +29,7 @@ reindex-job-poodle:
     - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
     - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${POODLE_JOB_ALLOC} .gitlab/spack/reindex-script.sh
 
-reindex-job-lassen:
+rebuild-index-lassen:
   stage: stage-rebuild-index
   tags: [lassen, shell]
   rules:
@@ -39,7 +39,7 @@ reindex-job-lassen:
   script:
     - lalloc ${LASSEN_JOB_ALLOC} .gitlab/spack/reindex-script.sh
 
-reindex-job-corona:
+rebuild-index-corona:
   stage: stage-rebuild-index
   tags: [corona, shell]
   rules:
@@ -52,7 +52,7 @@ reindex-job-corona:
     - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
     - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs ${CORONA_JOB_ALLOC} .gitlab/spack/reindex-script.sh)
 
-reindex-job-tioga:
+rebuild-index-tioga:
   stage: stage-rebuild-index
   tags: [tioga, shell]
   rules:
