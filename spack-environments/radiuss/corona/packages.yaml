@@ -1,6 +1,6 @@
 packages::
   all:
-    target: [zen]
+    require: target=zen
     compiler: [gcc, intel, clang, rocmcc, oneapi]
     providers:
       blas: [openblas]

@@ -1,6 +1,6 @@
 packages::
   all:
-    target: [zen3]
+    require: target=zen3
     compiler: [gcc, cce, clang, rocmcc]
     providers:
       blas: [netlib-lapack]

@@ -1,6 +1,6 @@
 packages::
   all:
-    target: [sapphirerapids]
+    require: target=sapphirerapids
     compiler: [gcc, intel, clang, oneapi]
     providers:
       blas: [openblas]

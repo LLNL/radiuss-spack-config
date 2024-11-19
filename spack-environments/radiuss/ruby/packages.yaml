@@ -1,6 +1,6 @@
 packages::
   all:
-    target: [cascadelake]
+    require: target=cascadelake
     compiler: [gcc, intel, clang, oneapi]
     providers:
       blas: [openblas]
