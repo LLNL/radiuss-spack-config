@@ -142,12 +142,12 @@ packages::
   groff:
     buildable: false
     externals:
-    - spec: groff@1.22.2
+    - spec: groff@1.22.3
       prefix: /usr
   hwloc:
     buildable: false
     externals:
-    - spec: hwloc@2.9.0
+    - spec: hwloc@2.11.1
       prefix: /usr
   libepoxy:
     buildable: false
@@ -159,12 +159,12 @@ packages::
     externals:
     - spec: libtool@2.4.6
       prefix: /usr
-  # NOTE: removed since fails on clang builds
-  # libunwind:
-  #   buildable: false
-  #   externals:
-  #   - spec: libunwind@1.3.1
-  #     prefix: /usr
+# NOTE: removed since fails on clang builds
+# libunwind:
+#   buildable: false
+#   externals:
+#   - spec: libunwind@1.3.1
+#     prefix: /usr
   libunwind:
     buildable: false
     version: [8.0.1]
@@ -194,8 +194,8 @@ packages::
   ninja:
     buildable: false
     externals:
-    - spec: ninja@1.11.0
-      prefix: /usr/tce/packages/ninja/ninja-1.11.0
+    - spec: ninja@1.11.1
+      prefix: /usr/tce/packages/ninja/ninja-1.11.1
   openblas:
     buildable: false
     externals:
