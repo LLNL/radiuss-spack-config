@@ -1,5 +1,5 @@
 ##############################################################################
-# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and
+# Copyright (c) 2019-2024, Lawrence Livermore National Security, LLC and
 # RADIUSS project contributors. See the COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (MIT)
@@ -71,7 +71,7 @@ build-on-ruby:
         job: generate-on-ruby
       - project: "lc-templates/id_tokens"
         file: "id_tokens.yml"
-      - local: ".gitlab/spack/reindex-override.yml"
+      - local: ".gitlab/spack/reindex-ruby.yml"
     strategy: depend
     forward:
       pipeline_variables: true

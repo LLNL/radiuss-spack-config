@@ -5,10 +5,13 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-rebuild-index:
+include:
+  - local: ".gitlab/spack/reindex-override.yml"
+
+rebuild-index-poodle:
   stage: stage-rebuild-index
-  tags: [oslic, shell]
-  rules:
-    - when: never
+  tags: [poodle, shell]
   script:
-    - echo "Override the job set by Spack"
+    - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
+    - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${POODLE_JOB_ALLOC} .gitlab/spack/reindex-script.sh
+  dependencies: []

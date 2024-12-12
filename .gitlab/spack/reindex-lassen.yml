@@ -5,10 +5,12 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-rebuild-index:
+include:
+  - local: ".gitlab/spack/reindex-override.yml"
+
+rebuild-index-lassen:
   stage: stage-rebuild-index
-  tags: [oslic, shell]
-  rules:
-    - when: never
+  tags: [lassen, shell]
   script:
-    - echo "Override the job set by Spack"
+    - lalloc ${LASSEN_JOB_ALLOC} .gitlab/spack/reindex-script.sh
+  dependencies: []
