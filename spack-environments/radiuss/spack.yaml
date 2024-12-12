@@ -43,7 +43,7 @@ spack:
   - compilers:
     - '%intel@=2023.2.1'
     - '%clang@=14.0.6'
-    - '%gcc@=10.3.1'
+    - '%gcc@=11.2.1'
     when: env.get("LCSCHEDCLUSTER", "") == "poodle"
   - compilers:
     - '+cuda %clang@=12.0.1.ibm.gcc.8.3.1 ^cuda@11.2.0+allow-unsupported-compilers'
