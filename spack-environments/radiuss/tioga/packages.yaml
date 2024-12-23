@@ -1,6 +1,6 @@
 packages::
   all:
-    target: [zen3]
+    require: target=zen3
     compiler: [gcc, cce, clang, rocmcc]
     providers:
       blas: [netlib-lapack]
@@ -59,21 +59,21 @@ packages::
     buildable: false
     externals:
     - spec: hipsparse@5.2.3%rocmcc@5.2.3
-      prefix: /opt/rocm-5.2.3/hipsparse
+      prefix: /opt/rocm-5.2.3
     - spec: hipsparse@5.3.0%rocmcc@5.3.0
-      prefix: /opt/rocm-5.3.0/hipsparse
+      prefix: /opt/rocm-5.3.0
     - spec: hipsparse@5.4.1%rocmcc@5.4.1
-      prefix: /opt/rocm-5.4.1/hipsparse
+      prefix: /opt/rocm-5.4.1
     - spec: hipsparse@5.4.3%rocmcc@5.4.3
-      prefix: /opt/rocm-5.4.3/hipsparse
+      prefix: /opt/rocm-5.4.3
     - spec: hipsparse@5.5.1%rocmcc@5.5.1
-      prefix: /opt/rocm-5.5.1/hipsparse
+      prefix: /opt/rocm-5.5.1
     - spec: hipsparse@5.6.1%rocmcc@5.6.1
-      prefix: /opt/rocm-5.6.1/hipsparse
+      prefix: /opt/rocm-5.6.1
     - spec: hipsparse@5.7.0%rocmcc@5.7.0
-      prefix: /opt/rocm-5.7.0/hipsparse
+      prefix: /opt/rocm-5.7.0
     - spec: hipsparse@5.7.1%rocmcc@5.7.1
-      prefix: /opt/rocm-5.7.1/hipsparse
+      prefix: /opt/rocm-5.7.1
     - spec: hipsparse@6.1.1%rocmcc@6.1.1
       prefix: /opt/rocm-6.1.1
     - spec: hipsparse@6.1.2%rocmcc@6.1.2
@@ -111,183 +111,183 @@ packages::
     buildable: false
     externals:
     - spec: hsa-rocr-dev@5.2.3%rocmcc@5.2.3
-      prefix: /opt/rocm-5.2.3/
+      prefix: /opt/rocm-5.2.3
     - spec: hsa-rocr-dev@5.3.0%rocmcc@5.3.0
-      prefix: /opt/rocm-5.3.0/
+      prefix: /opt/rocm-5.3.0
     - spec: hsa-rocr-dev@5.4.1%rocmcc@5.4.1
-      prefix: /opt/rocm-5.4.1/
+      prefix: /opt/rocm-5.4.1
     - spec: hsa-rocr-dev@5.4.3%rocmcc@5.4.3
-      prefix: /opt/rocm-5.4.3/
+      prefix: /opt/rocm-5.4.3
     - spec: hsa-rocr-dev@5.5.1%rocmcc@5.5.1
-      prefix: /opt/rocm-5.5.1/
+      prefix: /opt/rocm-5.5.1
     - spec: hsa-rocr-dev@5.6.1%rocmcc@5.6.1
-      prefix: /opt/rocm-5.6.1/
+      prefix: /opt/rocm-5.6.1
     - spec: hsa-rocr-dev@5.7.0%rocmcc@5.7.0
-      prefix: /opt/rocm-5.7.0/
+      prefix: /opt/rocm-5.7.0
     - spec: hsa-rocr-dev@5.7.1%rocmcc@5.7.1
-      prefix: /opt/rocm-5.7.1/
+      prefix: /opt/rocm-5.7.1
     - spec: hsa-rocr-dev@6.1.1%rocmcc@6.1.1
-      prefix: /opt/rocm-6.1.1/
+      prefix: /opt/rocm-6.1.1
     - spec: hsa-rocr-dev@6.1.2%rocmcc@6.1.2
-      prefix: /opt/rocm-6.1.2/
+      prefix: /opt/rocm-6.1.2
     - spec: hsa-rocr-dev@6.2.0%rocmcc@6.2.0
-      prefix: /opt/rocm-6.2.0/
+      prefix: /opt/rocm-6.2.0
   rocminfo:
     version: [5.2.3, 5.3.0, 5.4.1, 5.4.3, 5.5.1, 5.6.1, 5.7.0, 5.7.1, 6.1.1, 6.1.2, 6.2.0]
     buildable: false
     externals:
     - spec: rocminfo@5.2.3%rocmcc@5.2.3
-      prefix: /opt/rocm-5.2.3/
+      prefix: /opt/rocm-5.2.3
     - spec: rocminfo@5.3.0%rocmcc@5.3.0
-      prefix: /opt/rocm-5.3.0/
+      prefix: /opt/rocm-5.3.0
     - spec: rocminfo@5.4.1%rocmcc@5.4.1
-      prefix: /opt/rocm-5.4.1/
+      prefix: /opt/rocm-5.4.1
     - spec: rocminfo@5.4.3%rocmcc@5.4.3
-      prefix: /opt/rocm-5.4.3/
+      prefix: /opt/rocm-5.4.3
     - spec: rocminfo@5.5.1%rocmcc@5.5.1
-      prefix: /opt/rocm-5.5.1/
+      prefix: /opt/rocm-5.5.1
     - spec: rocminfo@5.6.1%rocmcc@5.6.1
-      prefix: /opt/rocm-5.6.1/
+      prefix: /opt/rocm-5.6.1
     - spec: rocminfo@5.7.0%rocmcc@5.7.0
-      prefix: /opt/rocm-5.7.0/
+      prefix: /opt/rocm-5.7.0
     - spec: rocminfo@5.7.1%rocmcc@5.7.1
-      prefix: /opt/rocm-5.7.1/
+      prefix: /opt/rocm-5.7.1
     - spec: rocminfo@6.1.1%rocmcc@6.1.1
-      prefix: /opt/rocm-6.1.1/
+      prefix: /opt/rocm-6.1.1
     - spec: rocminfo@6.1.2%rocmcc@6.1.2
-      prefix: /opt/rocm-6.1.2/
+      prefix: /opt/rocm-6.1.2
     - spec: rocminfo@6.2.0%rocmcc@6.2.0
-      prefix: /opt/rocm-6.2.0/
+      prefix: /opt/rocm-6.2.0
   rocm-device-libs:
     version: [5.2.3, 5.3.0, 5.4.1, 5.4.3, 5.5.1, 5.6.1, 5.7.0, 5.7.1, 6.1.1, 6.1.2, 6.2.0]
     buildable: false
     externals:
     - spec: rocm-device-libs@5.2.3%rocmcc@5.2.3
-      prefix: /opt/rocm-5.2.3/
+      prefix: /opt/rocm-5.2.3
     - spec: rocm-device-libs@5.3.0%rocmcc@5.3.0
-      prefix: /opt/rocm-5.3.0/
+      prefix: /opt/rocm-5.3.0
     - spec: rocm-device-libs@5.4.1%rocmcc@5.4.1
-      prefix: /opt/rocm-5.4.1/
+      prefix: /opt/rocm-5.4.1
     - spec: rocm-device-libs@5.4.3%rocmcc@5.4.3
-      prefix: /opt/rocm-5.4.3/
+      prefix: /opt/rocm-5.4.3
     - spec: rocm-device-libs@5.5.1%rocmcc@5.5.1
-      prefix: /opt/rocm-5.5.1/
+      prefix: /opt/rocm-5.5.1
     - spec: rocm-device-libs@5.6.1%rocmcc@5.6.1
-      prefix: /opt/rocm-5.6.1/
+      prefix: /opt/rocm-5.6.1
     - spec: rocm-device-libs@5.7.0%rocmcc@5.7.0
-      prefix: /opt/rocm-5.7.0/
+      prefix: /opt/rocm-5.7.0
     - spec: rocm-device-libs@5.7.1%rocmcc@5.7.1
-      prefix: /opt/rocm-5.7.1/
+      prefix: /opt/rocm-5.7.1
     - spec: rocm-device-libs@6.1.1%rocmcc@6.1.1
-      prefix: /opt/rocm-6.1.1/
+      prefix: /opt/rocm-6.1.1
     - spec: rocm-device-libs@6.1.2%rocmcc@6.1.2
-      prefix: /opt/rocm-6.1.2/
+      prefix: /opt/rocm-6.1.2
     - spec: rocm-device-libs@6.2.0%rocmcc@6.2.0
-      prefix: /opt/rocm-6.2.0/
+      prefix: /opt/rocm-6.2.0
   rocprim:
     version: [5.2.3, 5.3.0, 5.4.1, 5.4.3, 5.5.1, 5.6.1, 5.7.0, 5.7.1, 6.1.1, 6.1.2, 6.2.0]
     buildable: false
     externals:
     - spec: rocprim@5.2.3%rocmcc@5.2.3
-      prefix: /opt/rocm-5.2.3/
+      prefix: /opt/rocm-5.2.3
     - spec: rocprim@5.3.0%rocmcc@5.3.0
-      prefix: /opt/rocm-5.3.0/
+      prefix: /opt/rocm-5.3.0
     - spec: rocprim@5.4.1%rocmcc@5.4.1
-      prefix: /opt/rocm-5.4.1/
+      prefix: /opt/rocm-5.4.1
     - spec: rocprim@5.4.3%rocmcc@5.4.3
-      prefix: /opt/rocm-5.4.3/
+      prefix: /opt/rocm-5.4.3
     - spec: rocprim@5.5.1%rocmcc@5.5.1
-      prefix: /opt/rocm-5.5.1/
+      prefix: /opt/rocm-5.5.1
     - spec: rocprim@5.6.1%rocmcc@5.6.1
-      prefix: /opt/rocm-5.6.1/
+      prefix: /opt/rocm-5.6.1
     - spec: rocprim@5.7.0%rocmcc@5.7.0
-      prefix: /opt/rocm-5.7.0/
+      prefix: /opt/rocm-5.7.0
     - spec: rocprim@5.7.1%rocmcc@5.7.1
-      prefix: /opt/rocm-5.7.1/
+      prefix: /opt/rocm-5.7.1
     - spec: rocprim@6.1.1%rocmcc@6.1.1
-      prefix: /opt/rocm-6.1.1/
+      prefix: /opt/rocm-6.1.1
     - spec: rocprim@6.1.2%rocmcc@6.1.2
-      prefix: /opt/rocm-6.1.2/
+      prefix: /opt/rocm-6.1.2
     - spec: rocprim@6.2.0%rocmcc@6.2.0
-      prefix: /opt/rocm-6.2.0/
+      prefix: /opt/rocm-6.2.0
   rocthrust:
     version: [5.2.3, 5.3.0, 5.4.1, 5.4.3, 5.5.1, 5.6.1, 5.7.0, 5.7.1, 6.1.1, 6.1.2, 6.2.0]
     buildable: false
     externals:
     - spec: rocthrust@5.2.3%rocmcc@5.2.3
-      prefix: /opt/rocm-5.2.3/
+      prefix: /opt/rocm-5.2.3
     - spec: rocthrust@5.3.0%rocmcc@5.3.0
-      prefix: /opt/rocm-5.3.0/
+      prefix: /opt/rocm-5.3.0
     - spec: rocthrust@5.4.1%rocmcc@5.4.1
-      prefix: /opt/rocm-5.4.1/
+      prefix: /opt/rocm-5.4.1
     - spec: rocthrust@5.4.3%rocmcc@5.4.3
-      prefix: /opt/rocm-5.4.3/
+      prefix: /opt/rocm-5.4.3
     - spec: rocthrust@5.5.1%rocmcc@5.5.1
-      prefix: /opt/rocm-5.5.1/
+      prefix: /opt/rocm-5.5.1
     - spec: rocthrust@5.6.1%rocmcc@5.6.1
-      prefix: /opt/rocm-5.6.1/
+      prefix: /opt/rocm-5.6.1
     - spec: rocthrust@5.7.0%rocmcc@5.7.0
-      prefix: /opt/rocm-5.7.0/
+      prefix: /opt/rocm-5.7.0
     - spec: rocthrust@5.7.1%rocmcc@5.7.1
-      prefix: /opt/rocm-5.7.1/
+      prefix: /opt/rocm-5.7.1
     - spec: rocthrust@6.1.1%rocmcc@6.1.1
-      prefix: /opt/rocm-6.1.1/
+      prefix: /opt/rocm-6.1.1
     - spec: rocthrust@6.1.2%rocmcc@6.1.2
-      prefix: /opt/rocm-6.1.2/
+      prefix: /opt/rocm-6.1.2
     - spec: rocthrust@6.2.0%rocmcc@6.2.0
-      prefix: /opt/rocm-6.2.0/
+      prefix: /opt/rocm-6.2.0
   rocsparse:
     version: [5.2.3, 5.3.0, 5.4.1, 5.4.3, 5.5.1, 5.6.1, 5.7.0, 5.7.1, 6.1.1, 6.1.2, 6.2.0]
     buildable: false
     externals:
     - spec: rocsparse@5.2.3%rocmcc@5.2.3
-      prefix: /opt/rocm-5.2.3/
+      prefix: /opt/rocm-5.2.3
     - spec: rocsparse@5.3.0%rocmcc@5.3.0
-      prefix: /opt/rocm-5.3.0/
+      prefix: /opt/rocm-5.3.0
     - spec: rocsparse@5.4.1%rocmcc@5.4.1
-      prefix: /opt/rocm-5.4.1/
+      prefix: /opt/rocm-5.4.1
     - spec: rocsparse@5.4.3%rocmcc@5.4.3
-      prefix: /opt/rocm-5.4.3/
+      prefix: /opt/rocm-5.4.3
     - spec: rocsparse@5.5.1%rocmcc@5.5.1
-      prefix: /opt/rocm-5.5.1/
+      prefix: /opt/rocm-5.5.1
     - spec: rocsparse@5.6.1%rocmcc@5.6.1
-      prefix: /opt/rocm-5.6.1/
+      prefix: /opt/rocm-5.6.1
     - spec: rocsparse@5.7.0%rocmcc@5.7.0
-      prefix: /opt/rocm-5.7.0/
+      prefix: /opt/rocm-5.7.0
     - spec: rocsparse@5.7.1%rocmcc@5.7.1
-      prefix: /opt/rocm-5.7.1/
+      prefix: /opt/rocm-5.7.1
     - spec: rocsparse@6.1.1%rocmcc@6.1.1
-      prefix: /opt/rocm-6.1.1/
+      prefix: /opt/rocm-6.1.1
     - spec: rocsparse@6.1.2%rocmcc@6.1.2
-      prefix: /opt/rocm-6.1.2/
+      prefix: /opt/rocm-6.1.2
     - spec: rocsparse@6.2.0%rocmcc@6.2.0
-      prefix: /opt/rocm-6.2.0/
+      prefix: /opt/rocm-6.2.0
   rocrand:
     version: [5.2.3, 5.3.0, 5.4.1, 5.4.3, 5.5.1, 5.6.1, 5.7.0, 5.7.1, 6.1.1, 6.1.2, 6.2.0]
     buildable: false
     externals:
     - spec: rocrand@5.2.3%rocmcc@5.2.3
-      prefix: /opt/rocm-5.2.3/
+      prefix: /opt/rocm-5.2.3
     - spec: rocrand@5.3.0%rocmcc@5.3.0
-      prefix: /opt/rocm-5.3.0/
+      prefix: /opt/rocm-5.3.0
     - spec: rocrand@5.4.1%rocmcc@5.4.1
-      prefix: /opt/rocm-5.4.1/
+      prefix: /opt/rocm-5.4.1
     - spec: rocrand@5.4.3%rocmcc@5.4.3
-      prefix: /opt/rocm-5.4.3/
+      prefix: /opt/rocm-5.4.3
     - spec: rocrand@5.5.1%rocmcc@5.5.1
-      prefix: /opt/rocm-5.5.1/
+      prefix: /opt/rocm-5.5.1
     - spec: rocrand@5.6.1%rocmcc@5.6.1
-      prefix: /opt/rocm-5.6.1/
+      prefix: /opt/rocm-5.6.1
     - spec: rocrand@5.7.0%rocmcc@5.7.0
-      prefix: /opt/rocm-5.7.0/
+      prefix: /opt/rocm-5.7.0
     - spec: rocrand@5.7.1%rocmcc@5.7.1
-      prefix: /opt/rocm-5.7.1/
+      prefix: /opt/rocm-5.7.1
     - spec: rocrand@6.1.1%rocmcc@6.1.1
-      prefix: /opt/rocm-6.1.1/
+      prefix: /opt/rocm-6.1.1
     - spec: rocrand@6.1.2%rocmcc@6.1.2
-      prefix: /opt/rocm-6.1.2/
+      prefix: /opt/rocm-6.1.2
     - spec: rocrand@6.2.0%rocmcc@6.2.0
-      prefix: /opt/rocm-6.2.0/
+      prefix: /opt/rocm-6.2.0
   cray-mpich:
     buildable: false
     externals:

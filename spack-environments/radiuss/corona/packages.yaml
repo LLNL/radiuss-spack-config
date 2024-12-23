@@ -1,6 +1,6 @@
 packages::
   all:
-    target: [zen]
+    require: target=zen
     compiler: [gcc, intel, clang, rocmcc, oneapi]
     providers:
       blas: [openblas]
@@ -55,21 +55,21 @@ packages::
     buildable: false
     externals:
     - spec: hipsparse@5.0.2%rocmcc@5.0.2
-      prefix: /opt/rocm-5.0.2/hipsparse
+      prefix: /opt/rocm-5.0.2
     - spec: hipsparse@5.1.1%rocmcc@5.1.1
-      prefix: /opt/rocm-5.1.1/hipsparse
+      prefix: /opt/rocm-5.1.1
     - spec: hipsparse@5.2.3%rocmcc@5.2.3
-      prefix: /opt/rocm-5.2.3/hipsparse
+      prefix: /opt/rocm-5.2.3
     - spec: hipsparse@5.4.3%rocmcc@5.4.3
-      prefix: /opt/rocm-5.4.3/hipsparse
+      prefix: /opt/rocm-5.4.3
     - spec: hipsparse@5.5.0%rocmcc@5.5.0
-      prefix: /opt/rocm-5.5.0/hipsparse
+      prefix: /opt/rocm-5.5.0
     - spec: hipsparse@5.5.1%rocmcc@5.5.1
-      prefix: /opt/rocm-5.5.1/hipsparse
+      prefix: /opt/rocm-5.5.1
     - spec: hipsparse@5.6.1%rocmcc@5.6.1
-      prefix: /opt/rocm-5.6.1/hipsparse
+      prefix: /opt/rocm-5.6.1
     - spec: hipsparse@5.7.1%rocmcc@5.7.1
-      prefix: /opt/rocm-5.7.1/hipsparse
+      prefix: /opt/rocm-5.7.1
     - spec: hipsparse@6.0.2%rocmcc@6.0.2
       prefix: /opt/rocm-6.0.2
   llvm-amdgpu:
@@ -99,45 +99,45 @@ packages::
     buildable: false
     externals:
     - spec: hsa-rocr-dev@5.0.2%rocmcc@5.0.2
-      prefix: /opt/rocm-5.0.2/
+      prefix: /opt/rocm-5.0.2
     - spec: hsa-rocr-dev@5.1.1%rocmcc@5.1.1
-      prefix: /opt/rocm-5.1.1/
+      prefix: /opt/rocm-5.1.1
     - spec: hsa-rocr-dev@5.2.3%rocmcc@5.2.3
-      prefix: /opt/rocm-5.2.3/
+      prefix: /opt/rocm-5.2.3
     - spec: hsa-rocr-dev@5.4.3%rocmcc@5.4.3
-      prefix: /opt/rocm-5.4.3/
+      prefix: /opt/rocm-5.4.3
     - spec: hsa-rocr-dev@5.5.0%rocmcc@5.5.0
-      prefix: /opt/rocm-5.5.0/
+      prefix: /opt/rocm-5.5.0
     - spec: hsa-rocr-dev@5.5.1%rocmcc@5.5.1
-      prefix: /opt/rocm-5.5.1/
+      prefix: /opt/rocm-5.5.1
     - spec: hsa-rocr-dev@5.6.1%rocmcc@5.6.1
-      prefix: /opt/rocm-5.6.1/
+      prefix: /opt/rocm-5.6.1
     - spec: hsa-rocr-dev@5.7.1%rocmcc@5.7.1
-      prefix: /opt/rocm-5.7.1/
+      prefix: /opt/rocm-5.7.1
     - spec: hsa-rocr-dev@6.0.2%rocmcc@6.0.2
-      prefix: /opt/rocm-6.0.2/
+      prefix: /opt/rocm-6.0.2
   rocminfo:
     version: [5.0.2, 5.1.1, 5.2.3, 5.4.3, 5.5.0, 5.5.1, 5.6.1, 5.7.1, 6.0.2]
     buildable: false
     externals:
     - spec: rocminfo@5.0.2%rocmcc@5.0.2
-      prefix: /opt/rocm-5.0.2/
+      prefix: /opt/rocm-5.0.2
     - spec: rocminfo@5.1.1%rocmcc@5.1.1
-      prefix: /opt/rocm-5.1.1/
+      prefix: /opt/rocm-5.1.1
     - spec: rocminfo@5.2.3%rocmcc@5.2.3
-      prefix: /opt/rocm-5.2.3/
+      prefix: /opt/rocm-5.2.3
     - spec: rocminfo@5.4.3%rocmcc@5.4.3
-      prefix: /opt/rocm-5.4.3/
+      prefix: /opt/rocm-5.4.3
     - spec: rocminfo@5.5.0%rocmcc@5.5.0
-      prefix: /opt/rocm-5.5.0/
+      prefix: /opt/rocm-5.5.0
     - spec: rocminfo@5.5.1%rocmcc@5.5.1
-      prefix: /opt/rocm-5.5.1/
+      prefix: /opt/rocm-5.5.1
     - spec: rocminfo@5.6.1%rocmcc@5.6.1
-      prefix: /opt/rocm-5.6.1/
+      prefix: /opt/rocm-5.6.1
     - spec: rocminfo@5.7.1%rocmcc@5.7.1
-      prefix: /opt/rocm-5.7.1/
+      prefix: /opt/rocm-5.7.1
     - spec: rocminfo@6.0.2%rocmcc@6.0.2
-      prefix: /opt/rocm-6.0.2/
+      prefix: /opt/rocm-6.0.2
   rocm-device-libs:
     version: [5.0.2, 5.1.1, 5.2.3, 5.4.3, 5.5.0, 5.5.1, 5.6.1, 5.7.1, 6.0.2]
     buildable: false
@@ -251,7 +251,7 @@ packages::
   curl:
     buildable: false
     externals:
-    - spec: curl@7.29.0
+    - spec: curl@7.61.1
       prefix: /usr
   diffutils:
     buildable: false
@@ -260,9 +260,8 @@ packages::
       prefix: /usr
   elfutils:
     buildable: false
-    version: [0.187]
     externals:
-    - spec: elfutils@0.187
+    - spec: elfutils@0.190
       prefix: /usr
   expat:
     buildable: false
@@ -302,12 +301,12 @@ packages::
   groff:
     buildable: false
     externals:
-    - spec: groff@1.22.2
+    - spec: groff@1.22.3
       prefix: /usr
   hwloc:
     buildable: false
     externals:
-    - spec: hwloc@2.9.0
+    - spec: hwloc@2.11.1
       prefix: /usr
   libepoxy:
     buildable: false
@@ -319,12 +318,12 @@ packages::
     externals:
     - spec: libtool@2.4.6
       prefix: /usr
-  # NOTE: removed since fails on clang builds
-  # libunwind:
-  #   buildable: false
-  #   externals:
-  #   - spec: libunwind@1.3.1
-  #     prefix: /usr
+# NOTE: removed since fails on clang builds
+# libunwind:
+#   buildable: false
+#   externals:
+#   - spec: libunwind@1.3.1
+#     prefix: /usr
   libunwind:
     buildable: false
     version: [8.0.1]
@@ -354,8 +353,8 @@ packages::
   ninja:
     buildable: false
     externals:
-    - spec: ninja@1.11.0
-      prefix: /usr/tce/packages/ninja/ninja-1.11.0
+    - spec: ninja@1.11.1
+      prefix: /usr/tce/packages/ninja/ninja-1.11.1
   openblas:
     buildable: false
     externals:

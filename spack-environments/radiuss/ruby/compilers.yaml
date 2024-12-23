@@ -1,135 +1,5 @@
 compilers::
 - compiler:
-    spec: rocmcc@=5.0.2
-    paths:
-      cc: /opt/rocm-5.0.2/llvm/bin/amdclang
-      cxx: /opt/rocm-5.0.2/llvm/bin/amdclang++
-      f77: /opt/rocm-5.0.2/llvm/bin/amdflang
-      fc: /opt/rocm-5.0.2/llvm/bin/amdflang
-    flags: {}
-    operating_system: rhel8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: rocmcc@=5.1.1
-    paths:
-      cc: /opt/rocm-5.1.1/llvm/bin/amdclang
-      cxx: /opt/rocm-5.1.1/llvm/bin/amdclang++
-      f77: /opt/rocm-5.1.1/llvm/bin/amdflang
-      fc: /opt/rocm-5.1.1/llvm/bin/amdflang
-    flags: {}
-    operating_system: rhel8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: rocmcc@=5.2.3
-    paths:
-      cc: /opt/rocm-5.2.3/llvm/bin/amdclang
-      cxx: /opt/rocm-5.2.3/llvm/bin/amdclang++
-      f77: /opt/rocm-5.2.3/llvm/bin/amdflang
-      fc: /opt/rocm-5.2.3/llvm/bin/amdflang
-    flags: {}
-    operating_system: rhel8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: rocmcc@=5.4.3
-    paths:
-      cc: /opt/rocm-5.4.3/llvm/bin/amdclang
-      cxx: /opt/rocm-5.4.3/llvm/bin/amdclang++
-      f77: /opt/rocm-5.4.3/llvm/bin/amdflang
-      fc: /opt/rocm-5.4.3/llvm/bin/amdflang
-    flags: {}
-    operating_system: rhel8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: rocmcc@=5.5.0
-    paths:
-      cc: /opt/rocm-5.5.0/llvm/bin/amdclang
-      cxx: /opt/rocm-5.5.0/llvm/bin/amdclang++
-      f77: /opt/rocm-5.5.0/llvm/bin/amdflang
-      fc: /opt/rocm-5.5.0/llvm/bin/amdflang
-    flags: {}
-    operating_system: rhel8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: rocmcc@=5.5.1
-    paths:
-      cc: /opt/rocm-5.5.1/llvm/bin/amdclang
-      cxx: /opt/rocm-5.5.1/llvm/bin/amdclang++
-      f77: /opt/rocm-5.5.1/llvm/bin/amdflang
-      fc: /opt/rocm-5.5.1/llvm/bin/amdflang
-    flags: {}
-    operating_system: rhel8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: rocmcc@=5.6.1
-    paths:
-      cc: /opt/rocm-5.6.1/llvm/bin/amdclang
-      cxx: /opt/rocm-5.6.1/llvm/bin/amdclang++
-      f77: /opt/rocm-5.6.1/llvm/bin/amdflang
-      fc: /opt/rocm-5.6.1/llvm/bin/amdflang
-    flags: {}
-    operating_system: rhel8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: rocmcc@=5.7.1
-    paths:
-      cc: /opt/rocm-5.7.1/llvm/bin/amdclang
-      cxx: /opt/rocm-5.7.1/llvm/bin/amdclang++
-      f77: /opt/rocm-5.7.1/llvm/bin/amdflang
-      fc: /opt/rocm-5.7.1/llvm/bin/amdflang
-    flags: {}
-    operating_system: rhel8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: rocmcc@=6.0.2
-    paths:
-      cc: /opt/rocm-6.0.2/llvm/bin/amdclang
-      cxx: /opt/rocm-6.0.2/llvm/bin/amdclang++
-      f77: /opt/rocm-6.0.2/llvm/bin/amdflang
-      fc: /opt/rocm-6.0.2/llvm/bin/amdflang
-    flags: {}
-    operating_system: rhel8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: pgi@=20.4
-    paths:
-      cc: /opt/toss/pgi/20.4/linux86-64-llvm/20.4/bin/pgcc
-      cxx: /opt/toss/pgi/20.4/linux86-64-llvm/20.4/bin/pgc++
-      f77: /opt/toss/pgi/20.4/linux86-64-llvm/20.4/bin/pgfortran
-      fc: /opt/toss/pgi/20.4/linux86-64-llvm/20.4/bin/pgfortran
-    flags: {}
-    operating_system: rhel8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
     spec: intel@=2021.6.0
     paths:
       cc: /usr/tce/packages/intel-classic/intel-classic-2021.6.0/bin/icc
@@ -211,6 +81,19 @@ compilers::
       cflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-10.3.1
       cxxflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-10.3.1
       fflags: -gcc-name=/usr/tce/packages/gcc/gcc-10.3.1/bin/gcc
+    operating_system: rhel8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: intel@=2024.2.1
+    paths:
+      cc: /collab/usr/global/tools/intel/toss_4_x86_64_ib/oneapi-2024.2.1/2024.2/bin/icx
+      cxx: /collab/usr/global/tools/intel/toss_4_x86_64_ib/oneapi-2024.2.1/2024.2/bin/icpx
+      f77: /collab/usr/global/tools/intel/toss_4_x86_64_ib/oneapi-2024.2.1/2024.2/bin/ifx
+      fc: /collab/usr/global/tools/intel/toss_4_x86_64_ib/oneapi-2024.2.1/2024.2/bin/ifx
+    flags: {}
     operating_system: rhel8
     target: x86_64
     modules: []

@@ -1,6 +1,6 @@
 packages::
   all:
-    target: [power9le]
+    require: target=power9le
     compiler: [gcc, pgi, clang, xl]
     providers:
       blas: [netlib-lapack]
