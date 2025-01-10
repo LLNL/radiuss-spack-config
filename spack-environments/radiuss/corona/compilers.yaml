@@ -117,19 +117,6 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: pgi@=20.4
-    paths:
-      cc: /opt/toss/pgi/20.4/linux86-64-llvm/20.4/bin/pgcc
-      cxx: /opt/toss/pgi/20.4/linux86-64-llvm/20.4/bin/pgc++
-      f77: /opt/toss/pgi/20.4/linux86-64-llvm/20.4/bin/pgfortran
-      fc: /opt/toss/pgi/20.4/linux86-64-llvm/20.4/bin/pgfortran
-    flags: {}
-    operating_system: rhel8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-- compiler:
     spec: intel@=2021.6.0
     paths:
       cc: /usr/tce/packages/intel-classic/intel-classic-2021.6.0/bin/icc
@@ -159,7 +146,7 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel@=2022.1.0
+    spec: oneapi@=2022.1.0
     paths:
       cc: /usr/tce/packages/intel/intel-2022.1.0/compiler/2022.1.0/linux/bin/icx
       cxx: /usr/tce/packages/intel/intel-2022.1.0/compiler/2022.1.0/linux/bin/icpx
@@ -172,7 +159,7 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel@=2022.1.0.gcc.10.3.1
+    spec: oneapi@=2022.1.0.gcc.10.3.1
     paths:
       cc: /usr/tce/packages/intel/intel-2022.1.0/compiler/2022.1.0/linux/bin/icx
       cxx: /usr/tce/packages/intel/intel-2022.1.0/compiler/2022.1.0/linux/bin/icpx
@@ -188,7 +175,7 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel@=2023.2.1
+    spec: oneapi@=2023.2.1
     paths:
       cc: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/icx
       cxx: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/icpx
@@ -201,7 +188,7 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel@=2023.2.1.gcc.10.3.1
+    spec: oneapi@=2023.2.1.gcc.10.3.1
     paths:
       cc: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/icx
       cxx: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/icpx
@@ -211,6 +198,19 @@ compilers::
       cflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-10.3.1
       cxxflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-10.3.1
       fflags: -gcc-name=/usr/tce/packages/gcc/gcc-10.3.1/bin/gcc
+    operating_system: rhel8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: oneapi@=2024.2.1
+    paths:
+      cc: /collab/usr/global/tools/intel/toss_4_x86_64_ib/oneapi-2024.2.1/2024.2/bin/icx
+      cxx: /collab/usr/global/tools/intel/toss_4_x86_64_ib/oneapi-2024.2.1/2024.2/bin/icpx
+      f77: /collab/usr/global/tools/intel/toss_4_x86_64_ib/oneapi-2024.2.1/2024.2/bin/ifx
+      fc: /collab/usr/global/tools/intel/toss_4_x86_64_ib/oneapi-2024.2.1/2024.2/bin/ifx
+    flags: {}
     operating_system: rhel8
     target: x86_64
     modules: []

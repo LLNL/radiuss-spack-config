@@ -264,10 +264,10 @@ packages::
     externals:
     - spec: elfutils@0.176
       prefix: /usr
-  epoxy:
+  libepoxy:
     buildable: false
     externals:
-    - spec: epoxy@0.0.0
+    - spec: libepoxy@0.0.0
       prefix: /usr
   findutils:
     buildable: false
@@ -378,6 +378,5 @@ packages::
   pdsh:
     buildable: false
     externals:
-    - spec: pdsh@2.33
+    - spec: pdsh@2.34
       prefix: /usr
-

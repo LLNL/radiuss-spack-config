@@ -29,7 +29,7 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel@=2022.1.0
+    spec: oneapi@=2022.1.0
     paths:
       cc: /usr/tce/packages/intel/intel-2022.1.0/compiler/2022.1.0/linux/bin/icx
       cxx: /usr/tce/packages/intel/intel-2022.1.0/compiler/2022.1.0/linux/bin/icpx
@@ -42,7 +42,7 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel@=2022.1.0.gcc.10.3.1
+    spec: oneapi@=2022.1.0.gcc.10.3.1
     paths:
       cc: /usr/tce/packages/intel/intel-2022.1.0/compiler/2022.1.0/linux/bin/icx
       cxx: /usr/tce/packages/intel/intel-2022.1.0/compiler/2022.1.0/linux/bin/icpx
@@ -58,7 +58,7 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel@=2023.2.1
+    spec: oneapi@=2023.2.1
     paths:
       cc: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/icx
       cxx: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/icpx
@@ -71,7 +71,7 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel@=2023.2.1.gcc.10.3.1
+    spec: oneapi@=2023.2.1.gcc.10.3.1
     paths:
       cc: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/icx
       cxx: /usr/tce/packages/intel/intel-2023.2.1/compiler/2023.2.1/linux/bin/icpx
@@ -87,7 +87,7 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel@=2024.2.1
+    spec: oneapi@=2024.2.1
     paths:
       cc: /collab/usr/global/tools/intel/toss_4_x86_64_ib/oneapi-2024.2.1/2024.2/bin/icx
       cxx: /collab/usr/global/tools/intel/toss_4_x86_64_ib/oneapi-2024.2.1/2024.2/bin/icpx
