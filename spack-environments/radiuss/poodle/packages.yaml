@@ -1,18 +1,18 @@
 packages::
   all:
-    require: target=sapphirerapids
-    compiler: [gcc, intel, clang, oneapi]
-    providers:
-      blas: [openblas]
-      lapack: [netlib-lapack]
-      mpi: [mvapich2]
     require:
+    - 'target=sapphirerapids'
     - spec: '^blt%oneapi'
       when: '%oneapi ^blt'
     - spec: '^blt%gcc'
       when: '%gcc ^blt'
     - spec: '^blt%intel'
       when: '%intel ^blt'
+    compiler: [gcc, intel, clang, oneapi]
+    providers:
+      blas: [openblas]
+      lapack: [netlib-lapack]
+      mpi: [mvapich2]
   gcc-runtime:
     require:
     - '%gcc'
