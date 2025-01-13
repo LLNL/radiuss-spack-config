@@ -12,65 +12,59 @@ ci:
 
   - any-job:
       before_script:
-        - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
-        - export SPACK_DISABLE_LOCAL_CONFIG=""
-        - export SPACK_USER_CACHE_PATH="${MY_SPACK_USER_CACHE}"
-        - spack --version
+        - echo "This section cannot be empty because of Spack CI implementation."
 
   - submapping:
     - match:
-      - arch=linux-rhel8-ivybridge
+      - 'target=zen'
+      build-job:
+        tags: [corona, shell]
+        script::
+        - export ALLOC_ID=$(flux jobs --name="${CORONA_ALLOC_NAME}" -n -o "{id}")
+        - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
+        - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
+        - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs ${CORONA_JOB_ALLOC} .gitlab/spack/ci-script.sh)
+    - match:
+      - 'target=cascadelake'
       build-job:
         tags: [ruby, shell]
         script::
-        - spack ${MY_SPACK_DEBUG} env activate --without-view ${SPACK_CONCRETE_ENV_DIR}
-        - spack ${MY_SPACK_DEBUG} config blame mirrors
-        - spack ${MY_SPACK_DEBUG} mirror rm buildcache-destination
-        - spack ${MY_SPACK_DEBUG} mirror add --oci-username ${CI_REGISTRY_USER} --oci-password ${CI_REGISTRY_PASSWORD} buildcache-destination oci://${CI_REGISTRY_IMAGE}
-        - spack ${MY_SPACK_DEBUG} config blame mirrors
-        #- spack ${MY_SPACK_DEBUG} ci rebuild
-        - echo Building ${SPACK_JOB_SPEC_PKG_NAME} /${SPACK_JOB_SPEC_DAG_HASH}
-        - spack --color=always --backtrace
-          install
-          --include-build-deps
-          --no-check-signature
-          --use-buildcache=package:never,dependencies:only
-          /${SPACK_JOB_SPEC_DAG_HASH}
-        - echo Pushing ${SPACK_JOB_SPEC_PKG_NAME} /${SPACK_JOB_SPEC_DAG_HASH}
-        - spack buildcache push buildcache-destination /${SPACK_JOB_SPEC_DAG_HASH}
+        - export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
+        - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${RUBY_JOB_ALLOC} .gitlab/spack/ci-script.sh
     - match:
-      - 'target=ppc64le:'
+      - 'target=sapphirerapids'
+      build-job:
+        tags: [poodle, shell]
+        script::
+        - export JOBID=$(squeue -h --name=${POODLE_ALLOC_NAME} --format=%A)
+        - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${POODLE_JOB_ALLOC} .gitlab/spack/ci-script.sh
+    - match:
+      - 'target=power9le'
       build-job:
         tags: [lassen, shell]
         script::
-        - spack ${MY_SPACK_DEBUG} env activate --without-view ${SPACK_CONCRETE_ENV_DIR}
-        - spack ${MY_SPACK_DEBUG} config blame mirrors
-        - spack ${MY_SPACK_DEBUG} mirror rm buildcache-destination
-        - spack ${MY_SPACK_DEBUG} mirror add --oci-username ${CI_REGISTRY_USER} --oci-password ${CI_REGISTRY_PASSWORD} buildcache-destination oci://${CI_REGISTRY_IMAGE}
-        - spack ${MY_SPACK_DEBUG} config blame mirrors
-        #- spack ${MY_SPACK_DEBUG} ci rebuild
-        - echo Building ${SPACK_JOB_SPEC_PKG_NAME} /${SPACK_JOB_SPEC_DAG_HASH}
-        - spack --color=always --backtrace
-          install
-          --include-build-deps
-          --no-check-signature
-          --use-buildcache=package:never,dependencies:only
-          /${SPACK_JOB_SPEC_DAG_HASH}
-        - echo Pushing ${SPACK_JOB_SPEC_PKG_NAME} /${SPACK_JOB_SPEC_DAG_HASH}
-        - spack buildcache push buildcache-destination /${SPACK_JOB_SPEC_DAG_HASH}
+        - lalloc ${LASSEN_JOB_ALLOC} .gitlab/spack/ci-script.sh
+    - match:
+      - 'target=zen3'
+      build-job:
+        tags: [tioga, shell]
+        script::
+        - export ALLOC_ID=$(flux jobs --name="${TIOGA_ALLOC_NAME}" -n -o "{id}")
+        - echo -e "[Information] Shared allocation ID = ${ALLOC_ID}"
+        - export PROXY="$( [[ -n "${ALLOC_ID}" ]] && echo "flux proxy ${ALLOC_ID}" || echo "" )"
+        - ${PROXY} flux watch $( ${PROXY} flux batch -o output.stdout.type=kvs ${TIOGA_JOB_ALLOC} .gitlab/spack/ci-script.sh)
     match_behavior: first
 
   - reindex-job:
       tags: [oslic, shell]
       before_script:
-        - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
-        - export SPACK_DISABLE_LOCAL_CONFIG=""
-        - export SPACK_USER_CACHE_PATH="${MY_SPACK_USER_CACHE}"
-        - spack --version
-        - spack ${MY_SPACK_DEBUG} config blame mirrors
-        - spack ${MY_SPACK_DEBUG} mirror add --oci-username ${CI_REGISTRY_USER} --oci-password ${CI_REGISTRY_PASSWORD} buildcache-destination oci://${CI_REGISTRY_IMAGE}
-        - spack ${MY_SPACK_DEBUG} config blame mirrors
+        - echo -e "[Information] We override reindex-job in .gitlab/spack/reindex-override.yml."
+        - echo -e "[Information] The jobs are then replaced by their machine specific equivalent named rebuild-index-<machine>."
+        - echo -e "[Information] The content of the reindex-job script moved to .gitlab/spack/reindex-script.sh"
+        - echo -e "[Error] This job should never run, please verify you implemented an override."
+
   - noop-job:
       tags: [oslic, shell]
+
   - cleanup-job:
       tags: [oslic, shell]

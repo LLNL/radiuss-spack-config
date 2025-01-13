@@ -1,0 +1,16 @@
+##############################################################################
+# Copyright (c) 2019-2024, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+include:
+  - local: ".gitlab/spack/reindex-override.yml"
+
+rebuild-index-lassen:
+  stage: stage-rebuild-index
+  tags: [lassen, shell]
+  script:
+    - lalloc ${LASSEN_JOB_ALLOC} .gitlab/spack/reindex-script.sh
+  dependencies: []

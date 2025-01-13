@@ -1,19 +1,69 @@
 ##############################################################################
-# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and
+# Copyright (c) 2019-2024, Lawrence Livermore National Security, LLC and
 # RADIUSS project contributors. See the COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-# ruby
+variables:
+  RUBY_ALLOC_NAME: ${CI_PROJECT_NAME}_ci_${CI_PIPELINE_ID}
+  RUBY_SHARED_ALLOC: "--exclusive --reservation=ci --time=30 --nodes=2"
+  RUBY_JOB_ALLOC: "--reservation=ci --overlap --nodes=1"
+
+.on-ruby:
+  tags:
+    - shell
+    - ruby
+  rules:
+    # Runs except if we explicitly deactivate ruby by variable.
+    - if: '$ON_RUBY == "OFF"'
+      when: never
+    # We should always release resources allocated in the pipeline.
+    - if: '$CI_JOB_NAME =~ /release-ruby/'
+      when: always
+    # A true statement is expected to allow jobs to run. Here is the default.
+    - when: on_success
+
+allocate-ruby:
+  variables:
+    GIT_STRATEGY: none
+  extends: [.on-ruby, .ruby-variables]
+  stage: .pre
+  script:
+    - salloc ${RUBY_SHARED_ALLOC} --no-shell --job-name=${RUBY_ALLOC_NAME}
+
+.prepare_ruby_jobid:
+  script:
+    - |
+      export JOBID=$(squeue -h --name=${RUBY_ALLOC_NAME} --format=%A)
+      echo -e "[Information] Shared allocation ID = ${JOBID}"
+      export JOBID_OPT=$([[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}")
+
+#[get-spack--]
+get-spack-ruby:
+  extends: [.on-ruby, .ruby-variables]
+  stage: setup
+  script:
+    - !reference [.prepare_ruby_jobid, script]
+    - srun ${JOBID_OPT} --reservation=ci --nodes=2 -n 2 scripts/get-spack
+  needs: [allocate-ruby]
+#[--get-spack]
+
 generate-on-ruby:
-  extends: [.generate-pipeline, .on-ruby]
+  extends: [.on-ruby, .ruby-variables]
   stage: generate
-  before_script:
+  script:
     - scripts/print-variables
+    - !reference [.prepare_ruby_jobid, script]
+    - srun ${JOBID_OPT} --reservation=ci --nodes=1 .gitlab/spack/generate-script.sh
+  artifacts:
+    paths:
+      - "${CI_PROJECT_DIR}/jobs_scratch_dir"
+  needs: [get-spack-ruby]
 
 #[send-variable-child--]
 build-on-ruby:
+  extends: [.ruby-variables]
   stage: build
   trigger:
     include:
@@ -21,8 +71,29 @@ build-on-ruby:
         job: generate-on-ruby
       - project: "lc-templates/id_tokens"
         file: "id_tokens.yml"
+      - local: ".gitlab/spack/reindex-ruby.yml"
     strategy: depend
     forward:
       pipeline_variables: true
   needs: [generate-on-ruby]
 #[--send-variable-child]
+
+#[rm-spack--]
+rm-spack-ruby:
+  extends: [.on-ruby, .ruby-variables]
+  stage: clean
+  script:
+    - !reference [.prepare_ruby_jobid, script]
+    - srun ${JOBID_OPT} --reservation=ci --nodes=2 -n 2 scripts/remove-spack
+  needs: [build-on-ruby]
+#[--rm-spack]
+
+release-ruby:
+  variables:
+    GIT_STRATEGY: none
+  extends: [.on-ruby, .ruby-variables]
+  stage: .post
+  script:
+    - !reference [.prepare_ruby_jobid, script]
+    - ([[ -n "${JOBID}" ]] && scancel ${JOBID} || exit 0)
+  needs: [rm-spack-ruby]

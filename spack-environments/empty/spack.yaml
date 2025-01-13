@@ -6,6 +6,6 @@
 ###############################################################################
 
 spack:
-  include: [../radiuss/$SYS_TYPE]
+  include: [../radiuss/$LCSCHEDCLUSTER]
   view: false
   concretization: separately

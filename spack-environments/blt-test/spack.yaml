@@ -6,7 +6,7 @@
 ##############################################################################
 
 spack:
-  include: [$SYS_TYPE]
+  include: [$LCSCHEDCLUSTER]
   concretization: separately
   view: false
   config:
@@ -26,10 +26,10 @@ spack:
   definitions:
   - compilers:
       - '%gcc@8.3.1'
-    when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
+    when: env.get("LCSCHEDCLUSTER", "") == "toss_3_x86_64_ib"
   - compilers:
       - '%xl@16.1.1.7'
-    when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
+    when: env.get("LCSCHEDCLUSTER", "") == "blueos_3_ppc64le_ib_p9"
   - projects:
     - blt-test@develop
     - blt-test@main

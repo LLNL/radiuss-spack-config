@@ -6,7 +6,7 @@
 ##############################################################################
 
 spack:
-  include: [$SYS_TYPE]
+  include: [$LCSCHEDCLUSTER]
   concretization: separately
   view: false
   config:
@@ -21,10 +21,10 @@ spack:
   definitions:
   - compilers:
       - '%gcc@8.3.1'
-    when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
+    when: env.get("LCSCHEDCLUSTER", "") == "ruby"
   - compilers:
       - '%clang@10.0.1'
-    when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
+    when: env.get("LCSCHEDCLUSTER", "") == "lassen"
   - projects:
     - chai@develop
     - chai@main
@@ -60,7 +60,7 @@ spack:
     - umpire@4.1.0
     - umpire@4.0.1
     - umpire@4.0.0
-    when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
+    when: env.get("LCSCHEDCLUSTER", "") == "ruby"
   - projects:
     - chai@develop+cuda
     - chai@main+cuda
@@ -82,7 +82,7 @@ spack:
     - umpire@2022.03.0+cuda
     - umpire@6.0.0+cuda
     - umpire@5.0.1+cuda
-    when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
+    when: env.get("LCSCHEDCLUSTER", "") == "lassen"
   specs:
   - matrix:
     - [$projects]
@@ -94,9 +94,9 @@ spack:
       - match:
         - target=broadwell
         runner-attributes:
-          tags: [quartz, shell]
+          tags: [ruby, shell]
           script:
-          - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
+          - . ${MY_SPACK_PARENT_DIR}/spack/share/spack/setup-env.sh
           - export SPACK_DISABLE_LOCAL_CONFIG=""
           - export SPACK_USER_CACHE_PATH="${MY_SPACK_USER_CACHE}"
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
@@ -108,7 +108,7 @@ spack:
         runner-attributes:
           tags: [lassen, shell]
           script:
-          - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
+          - . ${MY_SPACK_PARENT_DIR}/spack/share/spack/setup-env.sh
           - export SPACK_DISABLE_LOCAL_CONFIG=""
           - export SPACK_USER_CACHE_PATH="${MY_SPACK_USER_CACHE}"
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
@@ -116,5 +116,5 @@ spack:
     service-job-attributes:
       tags: [quartz, shell]
       before_script:
-      - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
+      - . ${MY_SPACK_PARENT_DIR}/spack/share/spack/setup-env.sh
 

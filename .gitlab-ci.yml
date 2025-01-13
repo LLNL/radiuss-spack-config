@@ -1,11 +1,10 @@
 ##############################################################################
-# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and
+# Copyright (c) 2019-2024, Lawrence Livermore National Security, LLC and
 # RADIUSS project contributors. See the COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-#[create-unique-path--]
 variables:
 # Use the umdev LLNL service user to run CI. This prevents from running
 # pipelines as an actual user.
@@ -13,14 +12,6 @@ variables:
 # Use the service user workspace. Solves permission issues, stores everything
 # at the same location whoever triggers a pipeline.
   CUSTOM_CI_BUILDS_DIR: /usr/workspace/bradiuss/gitlab-runner
-# Unique paths
-  MY_SPACK_PARENT_DIR: ${CUSTOM_CI_BUILDS_DIR}/llnl-stack-${CI_PIPELINE_ID}
-  MY_SPACK_PATH: ${CUSTOM_CI_BUILDS_DIR}/llnl-stack-${CI_PIPELINE_ID}/spack
-  MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
-  SPACK_USER_CACHE_PATH: ${CUSTOM_CI_BUILDS_DIR}/llnl-stack-${CI_PIPELINE_ID}/spack-user-cache
-#[--create-unique-path]
-  SPACK_DISABLE_LOCAL_CONFIG: ""
-  MY_SPACK_DEBUG: ""
 
 stages:
   - setup
@@ -31,7 +22,7 @@ stages:
 include:
   - project: 'lc-templates/id_tokens'
     file: 'id_tokens.yml'
-  - local: .gitlab/core-ci.yml
+  - local: .gitlab/variables.yml
     rules:
       - if: $MY_ENV_NAME != null
   - local: spack-environments/${MY_ENV_NAME}/pipeline.yml

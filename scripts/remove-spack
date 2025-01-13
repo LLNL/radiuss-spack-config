@@ -2,6 +2,8 @@
 
 set -e
 
+hostname
+
 #[rm-spack--]
 if [[ ! -d ${MY_SPACK_PARENT_DIR} ]]
 then

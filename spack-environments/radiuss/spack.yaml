@@ -8,8 +8,9 @@
 
 spack:
   #[general--]
-  include: [$SYS_TYPE]
+  include: [$LCSCHEDCLUSTER]
   concretizer:
+    reuse: false
     unify: false
   view: false
   #[--general]
@@ -26,36 +27,57 @@ spack:
     test_stage: $user_cache_path/test
     misc_cache: $user_cache_path/misc
     flags:
-      keep_werror: all
+      keep_werror: 'all'
   #[--config-override]
 
   #[definitions--]
   definitions:
   - compilers:
-    - '%gcc@=10.3.1'
-    - '%clang@=14.0.6'
-    when: env.get("SYS_TYPE", "") == "toss_4_x86_64_ib"
+    - '+rocm amdgpu_target=gfx906 %rocmcc@=5.7.1 ^hip@5.7.1'
+    when: env.get("LCSCHEDCLUSTER", "") == "corona"
   - compilers:
-    - '%xl@=16.1.1.12.gcc.8.3.1'
-    when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
+    - '%oneapi@=2023.2.1'
+    - '%clang@=14.0.6'
+    - '%gcc@=10.3.1'
+    when: env.get("LCSCHEDCLUSTER", "") == "ruby"
+  - compilers:
+    - '%oneapi@=2023.2.1'
+    - '%clang@=14.0.6'
+    - '%gcc@=11.2.1'
+    when: env.get("LCSCHEDCLUSTER", "") == "poodle"
+  - compilers:
+    - '+cuda %clang@=12.0.1.ibm.gcc.8.3.1 ^cuda@11.2.0+allow-unsupported-compilers'
+    - '+cuda %clang@=12.0.1.gcc.8.3.1 ^cuda@11.2.0+allow-unsupported-compilers'
+    - '+cuda %clang@=14.0.5.gcc.8.3.1 ^cuda@11.7.0+allow-unsupported-compilers'
+    - '+cuda %clang@=16.0.6.ibm.cuda.11.8.0.gcc.11.2.1 ^cuda@11.8.0+allow-unsupported-compilers'
+    - '+cuda %clang@=16.0.6.cuda.11.8.0.gcc.11.2.1 ^cuda@11.8.0+allow-unsupported-compilers'
+    - '+cuda %gcc@=11.2.1 ^cuda@11.8.0+allow-unsupported-compilers'
+    when: env.get("LCSCHEDCLUSTER", "") == "lassen"
+  - compilers:
+    - '+rocm amdgpu_target=gfx90a %rocmcc@=6.3.0 ^hip@6.3.0'
+    - '%cce@=18.0.1'
+    when: env.get("LCSCHEDCLUSTER", "") == "tioga"
   #[definitions--]
 
   - radiuss-projects:
     - mfem
     - hypre
     - sundials
-    - samrai
-    - xbraid
+#    - samrai
+#    - xbraid
     - umpire
     - raja
-    - py-maestrowf
-    - conduit
-    - zfp
+    - raja-perf
+    - chai
+    - care
+#    - py-maestrowf
+#    - conduit
+#    - zfp
     - axom
     - caliper
-    - ascent
-    - scr
-    when: env.get("SYS_TYPE", "") == "toss_4_x86_64_ib"
+#    - ascent
+#    - scr
+    when: env.get("LCSCHEDCLUSTER", "") in ["corona", "tioga"]
   - radiuss-projects:
     - mfem
     - hypre
@@ -64,6 +86,9 @@ spack:
     - xbraid
     - umpire
     - raja
+    - raja-perf
+    - chai
+    - care
     - py-maestrowf
     - conduit
     - zfp
@@ -71,7 +96,26 @@ spack:
     - caliper
     - ascent
     - scr
-    when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
+    when: env.get("LCSCHEDCLUSTER", "") in ["ruby", "poodle"]
+  - radiuss-projects:
+    - mfem
+    - hypre
+    - sundials
+#    - samrai
+#    - xbraid
+    - umpire
+    - raja
+    - raja-perf
+    - chai
+    - care
+#    - py-maestrowf
+#    - conduit
+    - zfp
+    - axom
+    - caliper
+    - ascent
+#    - scr
+    when: env.get("LCSCHEDCLUSTER", "") == "lassen"
   - dependencies: []
   #[--definitions]
 
